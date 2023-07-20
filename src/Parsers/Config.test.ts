@@ -1,10 +1,8 @@
 import { parseEnv } from "./Config";
 
 // approach to process.env mocking as described here https://webtips.dev/how-to-mock-processenv-in-jest
-describe("process.env settings tests", () => {
+describe("Config derived from process.env", () => {
   const env = process.env;
-
-  console.log(env);
 
   beforeEach(() => {
     jest.resetModules();
@@ -14,26 +12,33 @@ describe("process.env settings tests", () => {
     process.env = env;
   });
 
-  it('Should produce config when table dimensions are specified in process.env"', () => {
+  it('Should produce table config when table dimensions are specified in process.env"', () => {
     process.env.TABLE_HEIGHT = "6";
     process.env.TABLE_WIDTH = "9";
 
     const config = parseEnv();
 
-    console.log(config);
-
     expect(config.table?.size.height).toBe(6);
     expect(config.table?.size.width).toBe(9);
-    expect(true).toBeTruthy();
   });
 
-  it('Should fail as process.env should not be mocked anymore"', () => {
+  it('Should throw if table HEIGHT specified in process.env is not numeric and process.env.TABLE_WIDTH is specified"', () => {
+    process.env.TABLE_HEIGHT = "foo";
+    process.env.TABLE_WIDTH = "9";
+    expect(() => parseEnv()).toThrow();
+  });
+
+  it('Should throw if table WIDTH specified in process.env is not numeric and process.env.TABLE_HEIGHT is specified"', () => {
+    process.env.TABLE_HEIGHT = "9";
+    process.env.TABLE_WIDTH = "bar";
+    expect(() => parseEnv()).toThrow();
+  });
+
+  it('Should throw if table WIDTH specified in process.env is not numeric and process.env.TABLE_HEIGHT is specified"', () => {
+    process.env.FILENAME = "important.txt";
     const config = parseEnv();
 
-    console.log(config);
-
-    expect(config.table?.size.height).toBe(6);
-    expect(config.table?.size.width).toBe(9);
-    expect(true).toBeTruthy();
+    expect(config.input.fileName).toBeDefined();
+    expect(config.input.fileName).toBe("important.txt");
   });
 });

@@ -19,7 +19,8 @@ interface TableConfig {
 }
 
 export const parseEnv = () => {
-  let table: undefined | TableConfig;
+  const config = defaultConfig;
+
   if (process.env.TABLE_HEIGHT && process.env.TABLE_WIDTH) {
     const height = parseInt(process.env.TABLE_HEIGHT);
     const width = parseInt(process.env.TABLE_WIDTH);
@@ -28,13 +29,12 @@ export const parseEnv = () => {
       throw new Error(TABLE_HEIGHT_AND_TABLE_WIDTH_MUST_BE_NUMERIC);
     }
 
-    table = {
-      size: { width, height },
-    };
+    config.table.size.height = height;
+    config.table.size.width = width;
   }
 
-  const fileName = process.env.FILENAME;
-  return { ...defaultConfig, table, fileName };
+  if (process.env.FILENAME) config.input.fileName = process.env.FILENAME;
+  return config;
 };
 
 const defaultConfig: AppConfig = {
