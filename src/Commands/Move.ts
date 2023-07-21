@@ -1,9 +1,9 @@
-import { directionIsNorthOrEast, directionIsNorthOrSouth } from '../Types/CompassDirection';
-import { Position } from '../Types/Position';
-import { ICommand } from './ICommand';
+import { directionIsNorthOrEast, directionIsNorthOrSouth } from "../Types/CompassDirection";
+import { Position } from "../Types/Position";
+import { ICommand } from "./Command";
 
 export class MoveCommand implements ICommand {
-    public static command = 'MOVE';
+    public static command = "MOVE";
 
     public readonly canBeIgnored = true;
 
@@ -16,10 +16,10 @@ export class MoveCommand implements ICommand {
     private getNewPosition = (currentPosition: Position): Position => {
         const { coordinates, directionFacing } = currentPosition;
 
-        const axisToChange = directionIsNorthOrSouth(directionFacing) ? 'Y' : 'X';
+        const axisToChange = directionIsNorthOrSouth(directionFacing) ? "Y" : "X";
         const amountToChange = directionIsNorthOrEast(directionFacing) ? 1 : -1;
 
-        if (axisToChange === 'Y') {
+        if (axisToChange === "Y") {
             return { coordinates: { x: coordinates.x, y: coordinates.y + amountToChange }, directionFacing };
         } else {
             return { coordinates: { x: coordinates.x + amountToChange, y: coordinates.y }, directionFacing };

@@ -1,13 +1,13 @@
-import { getCommand } from '../Commands/CommandFactory';
-import { ICommand } from '../Commands/ICommand';
-import { AppConfig } from '../Parsers/Config';
-import { Position, zeroPosition } from '../Types/Position';
-import { Table } from '../Types/Table';
-import { cliInputService } from './cliInputService';
-import { FileReadingService } from './fileReadingService';
+import { getCommand } from "../Commands/CommandFactory";
+import { ICommand } from "../Commands/Command";
+import { AppConfig } from "../Parsers/Config";
+import { Position, zeroPosition } from "../Types/Position";
+import { Table } from "../Types/Table";
+import { cliInputService } from "./cliInputService";
+import { FileReadingService } from "./fileReadingService";
 
 export class ToborService {
-    private robotPosition: Position | 'OFF' = 'OFF';
+    private robotPosition: Position | "OFF" = "OFF";
 
     public constructor(private readonly config: AppConfig, private readonly table: Table) {
         console.log(`Tobor service running for Table ${config.table.size.width} x ${config.table.size.height}`);
@@ -18,7 +18,7 @@ export class ToborService {
 
         let newPosition;
 
-        if (this.robotPosition !== 'OFF') {
+        if (this.robotPosition !== "OFF") {
             newPosition = command.execute(this.robotPosition);
         } else {
             if (command.canBeIgnored) Promise.resolve();
@@ -40,6 +40,6 @@ export class ToborService {
             const inputService = new cliInputService();
             await inputService.requestInputLineByLine(this.onReadInput);
         }
-        console.log('I am all done');
+        console.log("I am all done");
     };
 }

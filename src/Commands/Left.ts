@@ -1,10 +1,10 @@
-import { CompassDirection } from '../Types/CompassDirection';
-import { DirectionChange } from '../Types/DirectionChange';
-import { Position } from '../Types/Position';
-import { IChangeDirectionCommand } from './IChangeDirectionCommand';
+import { CompassDirection } from "../Types/CompassDirection";
+import { DirectionChange } from "../Types/DirectionChange";
+import { Position } from "../Types/Position";
+import { IChangeDirectionCommand } from "./IChangeDirectionCommand";
 
 export class LeftCommand implements IChangeDirectionCommand {
-    public static command = 'LEFT';
+    public static command = "LEFT";
 
     public readonly canBeIgnored = true;
 

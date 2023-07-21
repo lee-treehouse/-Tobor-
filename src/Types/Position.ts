@@ -1,5 +1,5 @@
-import { CompassDirection } from './CompassDirection';
-import { Coordinates } from './Coordinates';
+import { CompassDirection } from "./CompassDirection";
+import { Coordinates } from "./Coordinates";
 
 export type Position = {
     coordinates: Coordinates;

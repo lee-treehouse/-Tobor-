@@ -1,7 +1,7 @@
-import * as dotenv from 'dotenv';
-import { parseEnv } from './Parsers/Config';
-import { ToborService } from './Services/toborService';
-import { Table } from './Types/Table';
+import * as dotenv from "dotenv";
+import { parseEnv } from "./Parsers/Config";
+import { ToborService } from "./Services/toborService";
+import { Table } from "./Types/Table";
 
 dotenv.config();
 
@@ -18,9 +18,9 @@ const run = async () => {
         await start();
     } catch (error) {
         // TODO source from configs
-        let message = 'Unknown Error';
+        let message = "Unknown Error";
         if (error instanceof Error) message = error.message;
-        console.log('Oh dear. something went wrong. Here is what I know about it, I hope it helps!');
+        console.log("Oh dear. something went wrong. Here is what I know about it, I hope it helps!");
         console.log(message);
         console.log("Oh yeah.. you're building software here, I'm not going to hide all your secrets");
         console.log(error);

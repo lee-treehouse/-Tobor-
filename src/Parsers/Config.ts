@@ -1,4 +1,4 @@
-import { TABLE_HEIGHT_AND_TABLE_WIDTH_MUST_BE_NUMERIC } from './ErrorMessages';
+import { TABLE_HEIGHT_AND_TABLE_WIDTH_MUST_BE_NUMERIC } from "./ErrorMessages";
 
 export interface AppConfig {
     input: {

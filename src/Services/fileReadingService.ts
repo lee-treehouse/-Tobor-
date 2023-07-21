@@ -1,4 +1,4 @@
-import { open } from 'node:fs/promises';
+import { open } from "node:fs/promises";
 export class FileReadingService {
     public constructor(private readonly filename: string) {}
 

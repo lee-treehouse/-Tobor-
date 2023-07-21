@@ -1,8 +1,8 @@
-import { Position } from '../Types/Position';
-import { ICommand } from './ICommand';
+import { Position } from "../Types/Position";
+import { ICommand } from "./Command";
 
 export class ReportCommand implements ICommand {
-    public static command = 'REPORT';
+    public static command = "REPORT";
 
     public readonly canBeIgnored = true;
 

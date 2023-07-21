@@ -1,5 +1,5 @@
-import { TableConfig } from '../Parsers/Config';
-import { Coordinates } from './Coordinates';
+import { TableConfig } from "../Parsers/Config";
+import { Coordinates } from "./Coordinates";
 
 export class Table {
     public constructor(private readonly config: TableConfig) {}
