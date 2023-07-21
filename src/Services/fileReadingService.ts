@@ -1,12 +1,12 @@
-import { open } from "node:fs/promises";
+import { open } from 'node:fs/promises';
 export class FileReadingService {
-  public constructor(private readonly filename: string) {}
+    public constructor(private readonly filename: string) {}
 
-  public async processFileLineByLine(cb: (line: string) => Promise<void>) {
-    const file = await open(this.filename);
+    public async processFileLineByLine(cb: (line: string) => Promise<void>) {
+        const file = await open(this.filename);
 
-    for await (const line of file.readLines()) {
-      await cb(line);
+        for await (const line of file.readLines()) {
+            await cb(line);
+        }
     }
-  }
 }

@@ -1,6 +1,6 @@
-import { Position } from "../Types/Position";
+import { Position } from '../Types/Position';
 
 export interface ICommand {
-  execute: (currentPosition: Position) => Position | void;
-  canBeIgnored: boolean;
+    execute: (currentPosition: Position) => Position | void;
+    canBeIgnored: boolean;
 }

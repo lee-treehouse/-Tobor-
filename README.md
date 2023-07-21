@@ -8,12 +8,12 @@
 ## Table of Contents
 
 1. [Development Environment Setup](#🔧-development-environment-setup)
-   - [Dependencies](#dependencies)
-   - [Installation](#installation)
+    - [Dependencies](#dependencies)
+    - [Installation](#installation)
 2. [Starting the Application](#🚀-starting-the-application)
 3. [Testing](#🏆-testing)
-   - [Watch Mode](#watch-mode)
-   - [Coverage](#coverage)
+    - [Watch Mode](#watch-mode)
+    - [Coverage](#coverage)
 
 <br/>
 
@@ -25,8 +25,8 @@
 
 ## Dependencies
 
-- node: 14.x.x
-- yarn: 1.x.x
+-   node: 14.x.x
+-   yarn: 1.x.x
 
 [](#installation)
 

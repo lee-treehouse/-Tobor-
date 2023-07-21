@@ -1,6 +1,5 @@
 example1.txt, example2.txt and example3.txt provide the example inputs specified in INSTRUCTIONS.md
 
-
 ```plain
 PLACE 0,0,NORTH
 MOVE
