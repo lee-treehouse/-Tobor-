@@ -9,8 +9,7 @@ export class ReportCommand implements ICommand {
     public constructor(args?: string[]) {}
 
     public execute(currentPosition: Position): Position | void {
-        console.log(
-            `I am ${ReportCommand.command} command and my current direction is ${currentPosition.directionFacing}`
-        );
+        const { directionFacing, coordinates } = currentPosition;
+        console.log(`${coordinates.x},${coordinates.y},${directionFacing}`);
     }
 }

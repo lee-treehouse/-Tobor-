@@ -13,12 +13,15 @@ export class LeftCommand implements IChangeDirectionCommand {
     public constructor(args?: string[]) {}
 
     public execute(currentPosition: Position): Position | void {
-        console.log(
-            `I am ${LeftCommand.command} command and my current direction is ${currentPosition.directionFacing}`
-        );
+        const { directionFacing, coordinates } = currentPosition;
+
+        const newPosition: Position = {
+            coordinates,
+            directionFacing: this.getNextDirection(directionFacing),
+        };
     }
 
-    public getNextDirection(currentDirection: CompassDirection): CompassDirection {
+    private getNextDirection(currentDirection: CompassDirection): CompassDirection {
         if (currentDirection === CompassDirection.NORTH) return CompassDirection.WEST;
         if (currentDirection === CompassDirection.WEST) return CompassDirection.SOUTH;
         if (currentDirection === CompassDirection.SOUTH) return CompassDirection.EAST;
