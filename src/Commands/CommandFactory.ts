@@ -1,12 +1,14 @@
-import { ICommand, separateCommandAndArguments } from "./Command";
+import { COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX } from "../ErrorMessages/Parsing";
+import { CommandInput } from "./CommandInput";
+import { ICommand } from "./ICommand";
 import { LeftCommand } from "./Left";
 import { MoveCommand } from "./Move";
 import { PlaceCommand } from "./Place";
 import { ReportCommand } from "./Report";
 import { RightCommand } from "./Right";
 
-export const getCommand = (input: string): ICommand => {
-    const { command, args } = separateCommandAndArguments(input);
+export const getCommand = (input: CommandInput): ICommand => {
+    const { command, args } = input;
 
     switch (command) {
         case LeftCommand.command:
@@ -20,12 +22,6 @@ export const getCommand = (input: string): ICommand => {
         case ReportCommand.command:
             return new ReportCommand(args);
     }
-    // if (command === LeftCommand.command) return new LeftCommand(args);
-    // if (command === MoveCommand.command) return new MoveCommand(args);
-    // if (command === RightCommand.command) return new RightCommand(args);
-    // if (command === PlaceCommand.command) return new PlaceCommand(args);
-    // if (command === ReportCommand.command) return new ReportCommand(args);
 
-    // TODO the commands themselves can manage throwing if args are unrecognized
-    throw new Error(`Unrecognized input ${input}`);
+    throw new Error(`${input} ${COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX}`);
 };
