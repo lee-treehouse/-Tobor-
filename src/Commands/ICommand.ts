@@ -1,3 +1,6 @@
+import { Position } from "../Types/Position";
+
 export interface ICommand {
-  command: string;
+  execute: (currentPosition: Position) => Position | void;
+  canBeIgnored: boolean;
 }

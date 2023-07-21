@@ -1,11 +1,21 @@
 import { CompassDirection } from "../Types/CompassDirection";
 import { DirectionChange } from "../Types/DirectionChange";
+import { Position } from "../Types/Position";
 import { IChangeDirectionCommand } from "./IChangeDirectionCommand";
 
 export class LeftCommand implements IChangeDirectionCommand {
-  public readonly command = "LEFT";
+  public static command = "LEFT";
+
+  public readonly canBeIgnored = true;
 
   public readonly directionChange = DirectionChange.LEFT;
+
+  public constructor(args?: string[]) {
+  }
+
+  public execute(currentPosition: Position): Position | void {
+    console.log(`I am ${LeftCommand.command} command and my current direction is ${currentPosition.directionFacing}`);
+  }
 
   public getNextDirection(currentDirection: CompassDirection): CompassDirection {
     if (currentDirection === CompassDirection.NORTH) return CompassDirection.WEST;
