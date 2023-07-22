@@ -1,10 +1,10 @@
 import { CompassDirection } from "../Common/CompassDirection";
 import { Position } from "../Common/Position";
 import { Table } from "../Common/Table";
-import { getDefaultConfig } from "../Config/Config";
+import { getDefaultTestConfig } from "../__TEST__/TestFiles/Config/DefaultTestConfig";
 import { ToborService } from "./toborService";
 
-const config = getDefaultConfig();
+const config = getDefaultTestConfig();
 const table = new Table(config.table);
 let service: ToborService;
 
