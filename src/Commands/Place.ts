@@ -1,6 +1,6 @@
-import { parseCompassDirection } from "../Types/CompassDirection";
-import { parseCoordinates } from "../Types/Coordinates";
-import { Position } from "../Types/Position";
+import { parseCompassDirection } from "../Common/CompassDirection";
+import { parseCoordinates } from "../Common/Coordinates";
+import { Position } from "../Common/Position";
 import { COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3 } from "../ErrorMessages/Parsing";
 import { ICommand } from "./ICommand";
 

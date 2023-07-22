@@ -1,18 +1,16 @@
 import { getCommand } from "../Commands/CommandFactory";
 import { separateCommandAndArguments } from "../Commands/CommandInput";
 import { ICommand } from "../Commands/ICommand";
-import { AppConfig } from "../Parsers/Config";
-import { Position, zeroPosition } from "../Types/Position";
-import { Table } from "../Types/Table";
+import { ToborConfig } from "../Config/Config";
+import { Position, zeroPosition } from "../Common/Position";
+import { Table } from "../Common/Table";
 import { cliInputService } from "./cliInputService";
 import { FileReadingService } from "./fileReadingService";
 
 export class ToborService {
     private robotPosition: Position | "OFF" = "OFF";
 
-    public constructor(private readonly config: AppConfig, private readonly table: Table) {
-        console.log(`Tobor service running for Table ${config.table.size.width} x ${config.table.size.height}`);
-    }
+    public constructor(private readonly config: ToborConfig, private readonly table: Table) {}
 
     public onReadInput = async (line: string): Promise<void> => {
         const commandInput = separateCommandAndArguments(line);

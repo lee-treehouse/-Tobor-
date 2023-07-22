@@ -1,4 +1,4 @@
-import { TableConfig } from "../Parsers/Config";
+import { TableConfig } from "../Config/Config";
 import { Coordinates } from "./Coordinates";
 
 export class Table {

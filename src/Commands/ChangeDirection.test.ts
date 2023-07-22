@@ -1,5 +1,5 @@
-import { CompassDirection } from "../Types/CompassDirection";
-import { Position } from "../Types/Position";
+import { CompassDirection } from "../Common/CompassDirection";
+import { Position } from "../Common/Position";
 import { getCommand } from "./CommandFactory";
 
 describe("Execute - LEFT", () => {

@@ -38,7 +38,7 @@ describe("Config derived from process.env", () => {
         process.env.FILENAME = "important.txt";
         const config = parseEnv();
 
-        expect(config.input.fileName).toBeDefined();
-        expect(config.input.fileName).toBe("important.txt");
+        expect(config.tobor.input.fileName).toBeDefined();
+        expect(config.tobor.input.fileName).toBe("important.txt");
     });
 });

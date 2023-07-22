@@ -1,4 +1,4 @@
-import { Position } from "../Types/Position";
+import { Position } from "../Common/Position";
 import { throwNoArgumentsExpected } from "./CommandInput";
 import { ICommand } from "./ICommand";
 

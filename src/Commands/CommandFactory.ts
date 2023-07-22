@@ -1,5 +1,5 @@
 import { COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX } from "../ErrorMessages/Parsing";
-import { DirectionChange } from "../Types/DirectionChange";
+import { DirectionChange } from "../Common/DirectionChange";
 import { ChangeDirectionCommand } from "./ChangeDirection";
 import { CommandInput } from "./CommandInput";
 import { ICommand } from "./ICommand";

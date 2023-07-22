@@ -3,7 +3,7 @@ import {
     directionIsNorthOrEast,
     directionIsNorthOrSouth,
     parseCompassDirection,
-} from "./CompassDirection";
+} from "../Common/CompassDirection";
 
 describe("Direction Change Parsing", () => {
     const compassDirectionValidCases = [

@@ -1,5 +1,5 @@
-import { directionIsNorthOrEast, directionIsNorthOrSouth } from "../Types/CompassDirection";
-import { Position } from "../Types/Position";
+import { directionIsNorthOrEast, directionIsNorthOrSouth } from "../Common/CompassDirection";
+import { Position } from "../Common/Position";
 import { throwNoArgumentsExpected } from "./CommandInput";
 import { ICommand } from "./ICommand";
 

@@ -1,4 +1,4 @@
-import { Position } from "../Types/Position";
+import { Position } from "../Common/Position";
 
 export interface ICommand {
     execute: (currentPosition: Position) => Position | void;

@@ -1,7 +1,7 @@
 import { Direction } from "readline";
-import { CompassDirection } from "../Types/CompassDirection";
-import { DirectionChange } from "../Types/DirectionChange";
-import { Position } from "../Types/Position";
+import { CompassDirection } from "../Common/CompassDirection";
+import { DirectionChange } from "../Common/DirectionChange";
+import { Position } from "../Common/Position";
 import { throwNoArgumentsExpected } from "./CommandInput";
 import { ICommand } from "./ICommand";
 

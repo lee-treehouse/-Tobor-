@@ -1,19 +1,23 @@
 import { TABLE_HEIGHT_AND_TABLE_WIDTH_MUST_BE_NUMERIC_SUFFIX } from "../ErrorMessages/Parsing";
 
 export interface AppConfig {
-    input: {
-        fileName?: string;
-        format: {
-            ignoreCase: boolean;
-        };
-    };
     table: TableConfig;
+    tobor: ToborConfig;
 }
 
 export interface TableConfig {
     size: {
         width: number;
         height: number;
+    };
+}
+
+export interface ToborConfig {
+    input: {
+        fileName?: string;
+        format: {
+            ignoreCase: boolean;
+        };
     };
 }
 
@@ -34,14 +38,16 @@ export const parseEnv = () => {
         config.table.size.width = width;
     }
 
-    if (FILENAME) config.input.fileName = FILENAME;
+    if (FILENAME) config.tobor.input.fileName = FILENAME;
     return config;
 };
 
 const defaultConfig: AppConfig = {
-    input: {
-        format: {
-            ignoreCase: true,
+    tobor: {
+        input: {
+            format: {
+                ignoreCase: true,
+            },
         },
     },
     table: {
