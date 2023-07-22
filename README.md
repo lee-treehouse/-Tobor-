@@ -16,7 +16,7 @@ You may configure the following settings in the application with environment var
 
  A convenient input to exercise many features of the application is `docker-mount/fixtures/explore_table_boundaries.txt` and is documented in `docker-mount/fixtures/`.
 
-Other sample files to exercise the application can be sourced from `src/Testfiles/Scenarios` and are documented in `src/Testfiles/Scenarios/README.md`.
+Other sample files to exercise the application can be sourced from `src/__TESTS__Testfiles/Scenarios` and are documented in `src/__TESTS__Testfiles/Scenarios/README.md`.
 
 ## How to exercise the application
 
