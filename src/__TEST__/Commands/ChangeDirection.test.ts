@@ -1,6 +1,6 @@
-import { CompassDirection } from "../Common/CompassDirection";
-import { Position } from "../Common/Position";
-import { getCommand } from "./CommandFactory";
+import { CompassDirection } from "../../Common/CompassDirection";
+import { Position } from "../../Common/Position";
+import { getCommand } from "../../Commands/CommandFactory";
 
 describe("Execute - LEFT", () => {
     it("Should return a Position with coordinates that have not changed from the input position", () => {

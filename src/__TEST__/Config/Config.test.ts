@@ -1,4 +1,4 @@
-import { getConfig } from "./Config";
+import { getConfig } from "../../Config/Config";
 
 // approach to process.env mocking as described here https://webtips.dev/how-to-mock-processenv-in-jest
 describe("Config derived from process.env", () => {

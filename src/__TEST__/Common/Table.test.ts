@@ -1,5 +1,5 @@
-import { getDefaultConfig } from "../Config/Config";
-import { Table } from "./Table";
+import { getDefaultConfig } from "../../Config/Config";
+import { Table } from "../../Common/Table";
 
 const config = getDefaultConfig();
 let table: Table;

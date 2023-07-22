@@ -52,9 +52,11 @@ tobor
 ### Run tests locally
 
 TODO
+
 ### Run the application locally
 
 TODO
+
 ## Design discussion
 
 I chose to impose a constraint that all commands and arguments should be modelled in uppercase. This allows me to easily allow for case insensitivity by offering the `capitaliseCommandsAndArgs` configuration.

@@ -1,7 +1,7 @@
-import { CompassDirection } from "../Common/CompassDirection";
-import { Position } from "../Common/Position";
-import { getCommand } from "./CommandFactory";
-import { ReportCommand } from "./Report";
+import { CompassDirection } from "../../Common/CompassDirection";
+import { Position } from "../../Common/Position";
+import { getCommand } from "../../Commands/CommandFactory";
+import { ReportCommand } from "../../Commands/Report";
 
 describe("Execute", () => {
     it("Should not return anything", () => {

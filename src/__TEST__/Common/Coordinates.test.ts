@@ -1,4 +1,4 @@
-import { parseCoordinates } from "./Coordinates";
+import { parseCoordinates } from "../../Common/Coordinates";
 
 describe("Coordinates Parsing", () => {
     const validCases = [

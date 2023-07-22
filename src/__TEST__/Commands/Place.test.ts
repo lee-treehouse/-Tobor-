@@ -1,7 +1,7 @@
-import { CompassDirection } from "../Common/CompassDirection";
-import { Position } from "../Common/Position";
-import { getCommand } from "./CommandFactory";
-import { PlaceCommand } from "./Place";
+import { CompassDirection } from "../../Common/CompassDirection";
+import { Position } from "../../Common/Position";
+import { getCommand } from "../../Commands/CommandFactory";
+import { PlaceCommand } from "../../Commands/Place";
 
 describe("Execute", () => {
     it("Should return a Position with direction facing and coordinates as specified in the command arguments", () => {

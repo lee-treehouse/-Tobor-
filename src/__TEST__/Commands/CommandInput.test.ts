@@ -1,4 +1,4 @@
-import { separateCommandAndArguments, throwNoArgumentsExpected } from "./CommandInput";
+import { separateCommandAndArguments, throwNoArgumentsExpected } from "../../Commands/CommandInput";
 
 describe("Separate Command and Arguments from input", () => {
     const DO_CAPITALISE_INPUT_COMMANDS_AND_ARGS = true;

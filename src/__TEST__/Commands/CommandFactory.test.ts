@@ -1,8 +1,8 @@
-import { ChangeDirectionCommand } from "./ChangeDirection";
-import { getCommand } from "./CommandFactory";
-import { MoveCommand } from "./Move";
-import { PlaceCommand } from "./Place";
-import { ReportCommand } from "./Report";
+import { ChangeDirectionCommand } from "../../Commands/ChangeDirection";
+import { getCommand } from "../../Commands/CommandFactory";
+import { MoveCommand } from "../../Commands/Move";
+import { PlaceCommand } from "../../Commands/Place";
+import { ReportCommand } from "../../Commands/Report";
 
 describe("Command Factory", () => {
     const validCases = [

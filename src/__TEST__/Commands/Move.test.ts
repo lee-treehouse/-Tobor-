@@ -1,7 +1,7 @@
-import { CompassDirection } from "../Common/CompassDirection";
-import { Position } from "../Common/Position";
-import { getCommand } from "./CommandFactory";
-import { MoveCommand } from "./Move";
+import { CompassDirection } from "../../Common/CompassDirection";
+import { Position } from "../../Common/Position";
+import { getCommand } from "../../Commands/CommandFactory";
+import { MoveCommand } from "../../Commands/Move";
 
 describe("Execute", () => {
     it("Should return a Position with direction facing that has not changed from the input position", () => {
