@@ -1,15 +1,15 @@
 import * as dotenv from "dotenv";
-import { parseEnv } from "./Parsers/Config";
+import { getConfig } from "./Config/Config";
 import { ToborService } from "./Services/toborService";
-import { Table } from "./Types/Table";
+import { Table } from "./Common/Table";
 
 dotenv.config();
 
 export const start = async () => {
-    const config = parseEnv();
+    const config = getConfig();
 
     const table = new Table(config.table);
-    const service = new ToborService(config, table);
+    const service = new ToborService(config.tobor, table);
     await service.readInput();
 };
 
