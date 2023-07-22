@@ -2,18 +2,14 @@ import { getConfig } from "./Config";
 
 // approach to process.env mocking as described here https://webtips.dev/how-to-mock-processenv-in-jest
 describe("Config derived from process.env", () => {
-    // const env = process.env;
+    const env = process.env;
 
     beforeEach(() => {
-        // jest.resetModules();
-        // process.env = { ...env };
-
-        delete process.env.TABLE_HEIGHT;
-        delete process.env.TABLE_WIDTH;
-        delete process.env.FILENAME;
+        jest.resetModules();
+        process.env = { ...env };
     });
     afterEach(() => {
-        // process.env = env;
+        process.env = env;
     });
 
     it("Should set table config when table dimensions are specified", () => {
@@ -49,10 +45,6 @@ describe("Config derived from process.env", () => {
     });
 
     it("Should set default config when no environment variables are set", () => {
-        // so has process.env been reset?
-
-        console.log(process.env);
-
         const config = getConfig();
 
         expect(config).toEqual({
