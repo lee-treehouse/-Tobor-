@@ -1,4 +1,7 @@
-import { TABLE_HEIGHT_AND_TABLE_WIDTH_MUST_BE_NUMERIC_SUFFIX } from "../ErrorMessages/Parsing";
+import {
+    TABLE_HEIGHT_AND_TABLE_WIDTH_BELOW_ONE_SUFFIX,
+    TABLE_HEIGHT_AND_TABLE_WIDTH_MUST_BE_NUMERIC_SUFFIX,
+} from "../ErrorMessages/Parsing";
 
 export interface AppConfig {
     table: TableConfig;
@@ -24,21 +27,25 @@ export interface ToborConfig {
 export const getConfig = () => {
     const config = getDefaultConfig();
 
-    const { TABLE_HEIGHT, TABLE_WIDTH, FILENAME } = process.env;
+    const { TABLE_HEIGHT: tableHeight, TABLE_WIDTH: tableWidth, FILENAME: fileName } = process.env;
 
-    if (TABLE_HEIGHT && TABLE_WIDTH) {
-        const height = parseInt(TABLE_HEIGHT);
-        const width = parseInt(TABLE_WIDTH);
+    if (tableHeight && tableWidth) {
+        const height = parseInt(tableHeight);
+        const width = parseInt(tableWidth);
 
         if (isNaN(height) || isNaN(width)) {
-            throw new Error(`${TABLE_HEIGHT} ${TABLE_WIDTH} ${TABLE_HEIGHT_AND_TABLE_WIDTH_MUST_BE_NUMERIC_SUFFIX}`);
+            throw new Error(`${tableHeight}, ${tableWidth} ${TABLE_HEIGHT_AND_TABLE_WIDTH_MUST_BE_NUMERIC_SUFFIX}`);
+        }
+
+        if (height < 1 || width < 1) {
+            throw new Error(`${tableHeight}, ${tableWidth} ${TABLE_HEIGHT_AND_TABLE_WIDTH_BELOW_ONE_SUFFIX}`);
         }
 
         config.table.size.height = height;
         config.table.size.width = width;
     }
 
-    if (FILENAME) config.tobor.input.fileName = FILENAME;
+    if (fileName) config.tobor.input.fileName = fileName;
     return config;
 };
 

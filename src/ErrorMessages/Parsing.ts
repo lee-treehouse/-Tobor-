@@ -35,3 +35,6 @@ export const COULD_NOT_PARSE_COMPASS_DIRECTION_SUFFIX =
 
 export const TABLE_HEIGHT_AND_TABLE_WIDTH_MUST_BE_NUMERIC_SUFFIX =
     "could not be parsed as table size. Values should be numeric.";
+
+export const TABLE_HEIGHT_AND_TABLE_WIDTH_BELOW_ONE_SUFFIX =
+    "could not be parsed as table size. Values should be one or greater.";

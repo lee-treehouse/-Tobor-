@@ -22,19 +22,51 @@ describe("Config derived from process.env", () => {
         expect(config.table?.size.width).toBe(9);
     });
 
-    it("Should throw specific message if table HEIGHT is not numeric and table WIDTH is specified", () => {
-        process.env.TABLE_HEIGHT = "foo";
-        process.env.TABLE_WIDTH = "9";
-        const configFunction = () => getConfig();
-        expect(configFunction).toThrow("foo 9 could not be parsed as table size. Values should be numeric.");
-    });
+    const nonNumericTableInputCases = [
+        {
+            height: "foo",
+            width: "4",
+            expected: "foo, 4 could not be parsed as table size. Values should be numeric.",
+        },
+        {
+            height: "5",
+            width: "bar",
+            expected: "5, bar could not be parsed as table size. Values should be numeric.",
+        },
+    ];
 
-    it("Should throw specific message if table WIDTH is not numeric and table HEIGHT is specified", () => {
-        process.env.TABLE_HEIGHT = "7";
-        process.env.TABLE_WIDTH = "bar";
-        const configFunction = () => getConfig();
-        expect(configFunction).toThrow("7 bar could not be parsed as table size. Values should be numeric.");
-    });
+    test.each(nonNumericTableInputCases)(
+        "Should throw specific error messages on non numeric input for table Height or Width when the other dimension is specified",
+        ({ height, width, expected }) => {
+            process.env.TABLE_HEIGHT = height;
+            process.env.TABLE_WIDTH = width;
+            const configFunction = () => getConfig();
+            expect(configFunction).toThrow(expected);
+        }
+    );
+
+    const belowOneTableInputCases = [
+        {
+            height: "0",
+            width: "4",
+            expected: "0, 4 could not be parsed as table size. Values should be one or greater.",
+        },
+        {
+            height: "5",
+            width: "-3",
+            expected: "5, -3 could not be parsed as table size. Values should be one or greater.",
+        },
+    ];
+
+    test.each(belowOneTableInputCases)(
+        "Should throw specific error messages on below one input for table Height or Width when the other dimension is specified",
+        ({ height, width, expected }) => {
+            process.env.TABLE_HEIGHT = height;
+            process.env.TABLE_WIDTH = width;
+            const configFunction = () => getConfig();
+            expect(configFunction).toThrow(expected);
+        }
+    );
 
     it("Should set input filename in config when filename is specified", () => {
         process.env.FILENAME = "important.txt";
