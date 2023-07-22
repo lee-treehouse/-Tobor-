@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-
 import { CompassDirection } from "../Common/CompassDirection";
 import { Position } from "../Common/Position";
 import { Table } from "../Common/Table";
@@ -10,11 +8,11 @@ const config = getDefaultConfig();
 const table = new Table(config.table);
 let service: ToborService;
 
-beforeEach(() => {
-    service = new ToborService(config.tobor, table);
-});
-
 describe("onReadInput", () => {
+    beforeEach(() => {
+        service = new ToborService(config.tobor, table);
+    });
+
     it("Should not have position change or console.log from commands that can be ignored when robot is not on table", async () => {
         const consoleSpy = jest.spyOn(console, "log");
 
