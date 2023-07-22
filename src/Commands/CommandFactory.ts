@@ -10,6 +10,8 @@ import { RightCommand } from "./Right";
 export const getCommand = (input: CommandInput): ICommand => {
     const { command, args } = input;
 
+    // TODO: what about LeftCommand and RightCommand both just instantiate a ChangeDirectionCommand but set the prioerty change direction
+
     switch (command) {
         case LeftCommand.command:
             return new LeftCommand(args);

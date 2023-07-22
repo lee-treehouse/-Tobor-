@@ -2,17 +2,15 @@ import { CompassDirection } from "../Types/CompassDirection";
 import { DirectionChange } from "../Types/DirectionChange";
 import { Position } from "../Types/Position";
 import { throwNoArgumentsExpected } from "./CommandInput";
-import { IChangeDirectionCommand } from "./IChangeDirectionCommand";
+import { ICommand } from "./ICommand";
 
-export class RightCommand implements IChangeDirectionCommand {
+export class RightCommand implements ICommand {
     public static command = "RIGHT";
 
     public readonly canBeIgnored = true;
 
-    public readonly directionChange = DirectionChange.RIGHT;
-
     public constructor(args: string[]) {
-        throwNoArgumentsExpected(args, RightCommand.command);
+        if (args && args.length > 0) throwNoArgumentsExpected(args, RightCommand.command);
     }
 
     public execute(currentPosition: Position): Position | void {
@@ -22,13 +20,13 @@ export class RightCommand implements IChangeDirectionCommand {
             coordinates,
             directionFacing: this.getNextDirection(directionFacing),
         };
+        return newPosition;
     }
 
     private getNextDirection(currentDirection: CompassDirection): CompassDirection {
         if (currentDirection === CompassDirection.NORTH) return CompassDirection.EAST;
         if (currentDirection === CompassDirection.EAST) return CompassDirection.SOUTH;
         if (currentDirection === CompassDirection.SOUTH) return CompassDirection.WEST;
-        // current direction must be west
         return CompassDirection.NORTH;
     }
 }
