@@ -34,6 +34,5 @@ export class ToborService {
             const inputService = new cliInputService();
             await inputService.requestInputLineByLine(this.onReadInput);
         }
-        console.log("I am all done");
     };
 }
