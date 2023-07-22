@@ -6,7 +6,7 @@ export type Position = {
     directionFacing: CompassDirection;
 };
 
-export const zeroPosition: Position = {
+export const defaultPosition: Position = {
     coordinates: {
         x: 0,
         y: 0,
