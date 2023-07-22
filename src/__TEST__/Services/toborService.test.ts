@@ -1,8 +1,8 @@
-import { CompassDirection } from "../Common/CompassDirection";
-import { Position } from "../Common/Position";
-import { Table } from "../Common/Table";
-import { getDefaultTestConfig } from "../__TEST__/TestFiles/Config/DefaultTestConfig";
-import { ToborService } from "./toborService";
+import { CompassDirection } from "../../Common/CompassDirection";
+import { Position } from "../../Common/Position";
+import { Table } from "../../Common/Table";
+import { getDefaultTestConfig } from "../TestFiles/Config/DefaultTestConfig";
+import { ToborService } from "../../Services/toborService";
 
 const config = getDefaultTestConfig();
 const table = new Table(config.table);
