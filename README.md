@@ -32,15 +32,19 @@ TODO
 
 **Build**
 
-```docker build --tag tobor .```
+```bash
+docker build --tag tobor .
+```
 
 **Run**
 
-```docker run tobor```
+```bash
+docker run tobor
+```
 
 **Run and supply environment variables**
 
-```
+```bash
 docker run \
 -e FILENAME=/app/docker-mount/fixtures/explore_table_boundaries.txt \
 -e TABLE_WIDTH=5 \
