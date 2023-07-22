@@ -13,7 +13,10 @@ export class ToborService {
     public constructor(private readonly config: ToborConfig, private readonly table: Table) {}
 
     public onReadInput = async (line: string): Promise<void> => {
-        const commandInput = separateCommandAndArguments(line);
+        const commandInput = separateCommandAndArguments(line, this.config.input.format.capitaliseCommandsAndArgs);
+
+        console.log(commandInput);
+
         const command: ICommand = getCommand(commandInput);
 
         let newPosition;

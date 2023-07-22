@@ -19,7 +19,7 @@ export interface ToborConfig {
     input: {
         fileName?: string;
         format: {
-            ignoreCase: boolean;
+            capitaliseCommandsAndArgs: boolean;
         };
     };
 }
@@ -54,7 +54,7 @@ const getDefaultConfig = (): AppConfig => {
         tobor: {
             input: {
                 format: {
-                    ignoreCase: true,
+                    capitaliseCommandsAndArgs: true,
                 },
             },
         },

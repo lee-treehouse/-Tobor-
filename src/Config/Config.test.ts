@@ -83,7 +83,7 @@ describe("Config derived from process.env", () => {
             tobor: {
                 input: {
                     format: {
-                        ignoreCase: true,
+                        capitaliseCommandsAndArgs: true,
                     },
                 },
             },
