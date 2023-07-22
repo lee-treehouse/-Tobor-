@@ -76,7 +76,7 @@ describe("Config derived from process.env", () => {
         expect(config.tobor.input.fileName).toBe("important.txt");
     });
 
-    it("Should set default config when no environment variables are set", () => {
+    it("Should return default config when no environment variables are set", () => {
         const config = getConfig();
 
         expect(config).toEqual({

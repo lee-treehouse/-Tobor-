@@ -49,7 +49,7 @@ export const getConfig = () => {
     return config;
 };
 
-const getDefaultConfig = (): AppConfig => {
+export const getDefaultConfig = (): AppConfig => {
     return {
         tobor: {
             input: {
