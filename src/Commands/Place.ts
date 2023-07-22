@@ -1,7 +1,7 @@
 import { parseCompassDirection } from "../Types/CompassDirection";
 import { parseCoordinates } from "../Types/Coordinates";
 import { Position } from "../Types/Position";
-import { COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3_SUFFIX } from "../ErrorMessages/Parsing";
+import { COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3 } from "../ErrorMessages/Parsing";
 import { ICommand } from "./ICommand";
 
 export class PlaceCommand implements ICommand {
@@ -12,12 +12,14 @@ export class PlaceCommand implements ICommand {
     private position: Position;
 
     public constructor(args: string[]) {
-        if (!args || args.length != 3) throw new Error(COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3_SUFFIX);
+        if (!args || args.length != 3) throw new Error(COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3(args));
         const coordinates = parseCoordinates(args[0], args[1]);
         const directionFacing = parseCompassDirection(args[2]);
         this.position = { coordinates, directionFacing };
     }
 
+    // currentPosition will be ignored when Placing item.
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public execute(currentPosition: Position): Position | void {
         return this.position;
     }

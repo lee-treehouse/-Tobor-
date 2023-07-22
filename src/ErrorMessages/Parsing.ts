@@ -4,6 +4,16 @@ export const COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX =
 export const COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3_SUFFIX =
     "could not be parsed as arguments to PLACE command. Three arguments are expected (X coordinate, Y Coordinate, Direction eg '1,2,NORTH').";
 
+export const COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3 = (args: string[]) => {
+    if (args.length === 0) return COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3_RECEIVED_NONE;
+    return `${args.join(
+        ","
+    )} could not be parsed as arguments to PLACE command. Three arguments are expected (X coordinate, Y coordinate, Direction) eg '1,2,NORTH'.`;
+};
+
+export const COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3_RECEIVED_NONE =
+    "Could not parse arguments to PLACE command. Three arguments are expected (X coordinate, Y coordinate, Direction) eg '1,2,NORTH'.";
+
 export const COULD_NOT_PARSE_ARGUMENTS_TO_COMMAND_NONE_EXPECTED = (args: string[], command: string) =>
     `${args.join(",")} could not be parsed as arguments to ${command} command. No arguments should be supplied.`;
 
