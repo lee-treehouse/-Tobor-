@@ -21,8 +21,8 @@ export interface ToborConfig {
     };
 }
 
-export const parseEnv = () => {
-    const config = defaultConfig;
+export const getConfig = () => {
+    const config = getDefaultConfig();
 
     const { TABLE_HEIGHT, TABLE_WIDTH, FILENAME } = process.env;
 
@@ -42,18 +42,20 @@ export const parseEnv = () => {
     return config;
 };
 
-const defaultConfig: AppConfig = {
-    tobor: {
-        input: {
-            format: {
-                ignoreCase: true,
+const getDefaultConfig = (): AppConfig => {
+    return {
+        tobor: {
+            input: {
+                format: {
+                    ignoreCase: true,
+                },
             },
         },
-    },
-    table: {
-        size: {
-            width: 5,
-            height: 5,
+        table: {
+            size: {
+                width: 5,
+                height: 5,
+            },
         },
-    },
+    };
 };
