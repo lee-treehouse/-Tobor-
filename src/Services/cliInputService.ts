@@ -2,7 +2,7 @@ import * as readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 
 export class cliInputService {
-    public async requestInputLineByLine(cb: (line: string) => Promise<void>) {
+    public async requestInputLineByLine(onReadLine: (line: string) => Promise<void>) {
         const rl = readline.createInterface({ input, output });
 
         console.log("Here is some intro and helper text");
@@ -11,7 +11,7 @@ export class cliInputService {
         while (userInput !== "EXIT") {
             userInput = await rl.question("Enter command or type EXIT to exit. \n");
             // TODO why is rl.question console.logging the answer?
-            await cb(userInput);
+            await onReadLine(userInput);
         }
     }
 }
