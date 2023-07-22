@@ -1,16 +1,16 @@
 # Examples Reference
 
-## Instructions
+## Examples based on Instructions
 
 - `instructions_example1.txt`
 - `instructions_example2.txt`
 - `instructions_example3.txt`
 
-provide the example inputs specified in `INSTRUCTIONS.md` in the root of this project.
+provide the example inputs specified in `INSTRUCTIONS.md` in the root of this project. Files containing the expected result are colocated with an `_expected`` suffix eg `instructions_example1_expected.txt``
 
-- `instructions_example3_lowercase.txt`
+- `Configuration/instructions_example3_lowercase.txt`
 
-provides the instructions from 'instructions_example3.txt' with the command and its' arguments in lowercase.
+provides the instructions from 'instructions_example3.txt' with the command and its' arguments in lowercase. Expected results are available from files with the `expected_if_capitalise` and `expected_if_not_capitalise` suffix in their filename. 
 
 ### Example 1
 
