@@ -1,13 +1,16 @@
 import { directionIsNorthOrEast, directionIsNorthOrSouth } from "../Types/CompassDirection";
 import { Position } from "../Types/Position";
-import { ICommand } from "./Command";
+import { throwNoArgumentsExpected } from "./CommandInput";
+import { ICommand } from "./ICommand";
 
 export class MoveCommand implements ICommand {
     public static command = "MOVE";
 
     public readonly canBeIgnored = true;
 
-    public constructor(args?: string[]) {}
+    public constructor(args: string[]) {
+        throwNoArgumentsExpected(args, MoveCommand.command);
+    }
 
     public execute(currentPosition: Position): Position | void {
         return this.getNewPosition(currentPosition);

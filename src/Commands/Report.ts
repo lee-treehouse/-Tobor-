@@ -1,12 +1,15 @@
 import { Position } from "../Types/Position";
-import { ICommand } from "./Command";
+import { throwNoArgumentsExpected } from "./CommandInput";
+import { ICommand } from "./ICommand";
 
 export class ReportCommand implements ICommand {
     public static command = "REPORT";
 
     public readonly canBeIgnored = true;
 
-    public constructor(args?: string[]) {}
+    public constructor(args: string[]) {
+        throwNoArgumentsExpected(args, ReportCommand.command);
+    }
 
     public execute(currentPosition: Position): Position | void {
         const { directionFacing, coordinates } = currentPosition;

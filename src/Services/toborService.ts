@@ -1,5 +1,6 @@
 import { getCommand } from "../Commands/CommandFactory";
-import { ICommand } from "../Commands/Command";
+import { separateCommandAndArguments } from "../Commands/CommandInput";
+import { ICommand } from "../Commands/ICommand";
 import { AppConfig } from "../Parsers/Config";
 import { Position, zeroPosition } from "../Types/Position";
 import { Table } from "../Types/Table";
@@ -14,7 +15,8 @@ export class ToborService {
     }
 
     public onReadInput = async (line: string): Promise<void> => {
-        const command: ICommand = getCommand(line);
+        const commandInput = separateCommandAndArguments(line);
+        const command: ICommand = getCommand(commandInput);
 
         let newPosition;
 

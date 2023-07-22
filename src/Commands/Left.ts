@@ -1,6 +1,7 @@
 import { CompassDirection } from "../Types/CompassDirection";
 import { DirectionChange } from "../Types/DirectionChange";
 import { Position } from "../Types/Position";
+import { throwNoArgumentsExpected } from "./CommandInput";
 import { IChangeDirectionCommand } from "./IChangeDirectionCommand";
 
 export class LeftCommand implements IChangeDirectionCommand {
@@ -10,7 +11,9 @@ export class LeftCommand implements IChangeDirectionCommand {
 
     public readonly directionChange = DirectionChange.LEFT;
 
-    public constructor(args?: string[]) {}
+    public constructor(args: string[]) {
+        throwNoArgumentsExpected(args, LeftCommand.command);
+    }
 
     public execute(currentPosition: Position): Position | void {
         const { directionFacing, coordinates } = currentPosition;

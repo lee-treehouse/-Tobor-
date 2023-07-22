@@ -22,6 +22,5 @@ export const getCommand = (input: CommandInput): ICommand => {
         case ReportCommand.command:
             return new ReportCommand(args);
     }
-
     throw new Error(`${input} ${COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX}`);
 };

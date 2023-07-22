@@ -1,7 +1,7 @@
 import {
     COULD_NOT_PARSE_COORDINATES_BELOW_ZERO_SUFFIX,
     COULD_NOT_PARSE_COORDINATES_NON_NUMERIC_SUFFIX,
-} from "./ErrorMessages";
+} from "../ErrorMessages/Parsing";
 
 export type Coordinates = {
     x: number;

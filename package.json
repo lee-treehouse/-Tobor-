@@ -13,6 +13,7 @@
         "start": "NODE_ENV=production node dist/index.js",
         "test": "jest --watchAll",
         "test:ci": "jest --ci",
+        "test:one": "jest src/Commands/CommandInput.test.ts --verbose",
         "test:coverage": "jest --coverage",
         "format:check": "prettier --check .",
         "format:write": "prettier --write .",

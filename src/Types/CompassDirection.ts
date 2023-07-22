@@ -1,4 +1,4 @@
-import { COULD_NOT_PARSE_COMPASS_DIRECTION_SUFFIX } from "./ErrorMessages";
+import { COULD_NOT_PARSE_COMPASS_DIRECTION_SUFFIX } from "../ErrorMessages/Parsing";
 
 export enum CompassDirection {
     NORTH = "NORTH",
