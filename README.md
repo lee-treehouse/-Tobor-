@@ -14,7 +14,9 @@ You may configure the following settings in the application with environment var
 - Case insensitive processing of inputs (via `CAPITALISE_COMMANDS_AND_ARGS` env var)
 - Reading input from file or interactively in CLI (via `FILENAME` env var)
 
-Sample files to exercise the application are provided in `docker-mount/fixtures` and documented in the readme located there. `explore_table_boundaries.txt` is a good input to exercise many features of the application.
+ A convenient input to exercise many features of the application is `docker-mount/fixtures/explore_table_boundaries.txt` and is documented in `docker-mount/fixtures/`.
+
+Other sample files to exercise the application can be sourced from `src/Testfiles/Scenarios` and are documented in `src/Testfiles/Scenarios/README.md`.
 
 ## How to exercise the application
 
@@ -66,3 +68,5 @@ TODO
 I chose to impose a constraint that all commands and arguments should be modelled in uppercase. This allows me to easily allow for case insensitivity by offering the `capitaliseCommandsAndArgs` configuration.
 
 I chose to implement compass directions (and turning LEFT or RIGHT from a compass direction) in the way that was easiest for the reader to understand. If more compass directions were to be modelled (like NORTH-WEST, NORTH-EAST, SOUTH-WEST, SOUTH-EAST) I'd suggest modifying `getNextDirectionLeft` and `getNextDirectionRight` to be one function that can cycle forward or backwards through an array of compass directions derived from the enum. If compass directions are to be more granular than that, an object that holds the name of the compass direction and the angle in degrees might be a better data structure.
+
+Where integer input is required, I am allowing any input that I can parse as an integer in base 10 that doesn't violate the entity's requirements. Eg decimal input is allowed.
