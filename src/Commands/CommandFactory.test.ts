@@ -1,17 +1,16 @@
+import { ChangeDirectionCommand } from "./ChangeDirection";
 import { getCommand } from "./CommandFactory";
-import { LeftCommand } from "./Left";
 import { MoveCommand } from "./Move";
 import { PlaceCommand } from "./Place";
 import { ReportCommand } from "./Report";
-import { RightCommand } from "./Right";
 
 describe("Command Factory", () => {
     const validCases = [
-        { input: { command: "LEFT", args: [] }, classType: LeftCommand },
+        { input: { command: "LEFT", args: [] }, classType: ChangeDirectionCommand },
         { input: { command: "MOVE", args: [] }, classType: MoveCommand },
         { input: { command: "PLACE", args: ["1", "2", "NORTH"] }, classType: PlaceCommand },
         { input: { command: "REPORT", args: [] }, classType: ReportCommand },
-        { input: { command: "RIGHT", args: [] }, classType: RightCommand },
+        { input: { command: "RIGHT", args: [] }, classType: ChangeDirectionCommand },
     ];
 
     test.each(validCases)(
