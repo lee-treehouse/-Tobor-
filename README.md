@@ -91,9 +91,11 @@ When invalid input is received, I am advising the user of the problem and then e
 
 Increase test coverage for CLI Input Reader, will require mocking cli input.
 
-Introduce setting that allows continuing the program when invalid input is received. Make parser errors a type of error so they can be recovered from in tobor service. Give line readers an interactive property so I can default to continuing when interactive is true and not when interactive is false. 
+Introduce setting that allows continuing the program when invalid input is received. Make parser errors a custom type of error so they can be recovered from in tobor service. Give line readers an interactive property so I can default to continuing when interactive is true and not when interactive is false. 
 
 Extend logger interface so I can cache what has been logged and check that in tests instead of needing to spy.
+
+Consdier split up the output of the tobor service (eg REPORT command) and output that is necessary for user interaction like CLI interaction. 
 
 
 
