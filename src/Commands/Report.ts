@@ -8,7 +8,7 @@ export class ReportCommand implements Command {
   public readonly canBeIgnored = true;
 
   public constructor(args: string[]) {
-    if (args && args.length > 0) throwNoArgumentsExpected(args, ReportCommand.command);
+    if (args && args.length > 0) throwNoArgumentsExpected({ args, command: ReportCommand.command });
   }
 
   public execute(currentPosition: Position): Position | void {

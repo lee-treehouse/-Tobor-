@@ -9,7 +9,7 @@ export class MoveCommand implements Command {
   public readonly canBeIgnored = true;
 
   public constructor(args: string[]) {
-    if (args && args.length > 0) throwNoArgumentsExpected(args, MoveCommand.command);
+    if (args && args.length > 0) throwNoArgumentsExpected({ args, command: MoveCommand.command });
   }
 
   public execute(currentPosition: Position): Position | void {
