@@ -24,13 +24,13 @@ describe("Execute", () => {
 });
 
 describe("Properties", () => {
-  it("Should be able to be ignored eg if item is not placed on a table", () => {
+  it("Should not be able to be ignored eg if item is not placed on a table", () => {
     const exitCommand = new ExitCommand([]);
 
-    expect(exitCommand.canBeIgnored).toBe(true);
+    expect(exitCommand.canBeIgnored).toBe(false);
   });
 
-  it("Should have static command property 'REPORT' so command can be invoked", () => {
+  it("Should have static command property 'EXIT' so command can be invoked", () => {
     expect(ExitCommand.command).toBe("EXIT");
   });
 });
