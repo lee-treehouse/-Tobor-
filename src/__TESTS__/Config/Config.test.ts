@@ -1,4 +1,4 @@
-import { getConfig } from "../../Config/Config";
+import { getConfig, getDefaultConfig } from "../../Config/Config";
 
 // approach to process.env mocking as described here https://webtips.dev/how-to-mock-processenv-in-jest
 describe("Config derived from process.env", () => {
@@ -83,7 +83,7 @@ describe("Config derived from process.env", () => {
             tobor: {
                 input: {
                     format: {
-                        capitaliseCommandsAndArgs: true,
+                        capitaliseCommandsAndArgs: false,
                     },
                 },
             },
@@ -95,4 +95,33 @@ describe("Config derived from process.env", () => {
             },
         });
     });
+
+    const capitaliseCommandAndArgsValidCases = [
+        { value: "true", result: true },
+        { value: "TRUE", result: true },
+        { value: "false", result: false },
+        { value: "FALSE", result: false },
+    ];
+    test.each(capitaliseCommandAndArgsValidCases)(
+        "Should set capitalise commands and args to $expected when value $value is provided",
+        ({ value, result }) => {
+            process.env.CAPITALISE_COMMANDS_AND_ARGS = value;
+            const config = getConfig();
+            expect(config.tobor.input.format.capitaliseCommandsAndArgs).toBe(result);
+        }
+    );
+
+    const capitaliseCommandAndArgsInvalidCases = [{ value: "foo" }, { value: "1" }, { value: "yes" }, { value: "" }];
+    test.each(capitaliseCommandAndArgsInvalidCases)(
+        "Should not override capitalise commands and args default value when invalid value $value is provided",
+        ({ value }) => {
+            process.env.CAPITALISE_COMMANDS_AND_ARGS = value;
+            const config = getConfig();
+            expect(config.tobor.input.format.capitaliseCommandsAndArgs).toBe(
+                getDefaultConfig().tobor.input.format.capitaliseCommandsAndArgs
+            );
+        }
+    );
 });
+
+//TODO add not set cases

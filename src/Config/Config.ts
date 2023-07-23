@@ -27,7 +27,12 @@ export interface ToborConfig {
 export const getConfig = () => {
     const config = getDefaultConfig();
 
-    const { TABLE_HEIGHT: tableHeight, TABLE_WIDTH: tableWidth, FILENAME: fileName } = process.env;
+    const {
+        TABLE_HEIGHT: tableHeight,
+        TABLE_WIDTH: tableWidth,
+        FILENAME: fileName,
+        CAPITALISE_COMMANDS_AND_ARGS: capitaliseCommandsAndArgs,
+    } = process.env;
 
     if (tableHeight && tableWidth) {
         const height = parseInt(tableHeight);
@@ -46,6 +51,13 @@ export const getConfig = () => {
     }
 
     if (fileName) config.tobor.input.fileName = fileName;
+
+    if (capitaliseCommandsAndArgs) {
+        const upperCase = capitaliseCommandsAndArgs.toUpperCase();
+        if (upperCase === "TRUE" || upperCase === "FALSE")
+            config.tobor.input.format.capitaliseCommandsAndArgs = upperCase === "TRUE";
+    }
+
     return config;
 };
 
@@ -54,7 +66,7 @@ export const getDefaultConfig = (): AppConfig => {
         tobor: {
             input: {
                 format: {
-                    capitaliseCommandsAndArgs: true,
+                    capitaliseCommandsAndArgs: false,
                 },
             },
         },

@@ -51,17 +51,24 @@ docker run \
 -e FILENAME=/app/docker-mount/fixtures/explore_table_boundaries.txt \
 -e TABLE_WIDTH=5 \
 -e TABLE_HEIGHT=5 \
+-e CAPITALISE_COMMANDS_AND_ARGS=true \
 --mount type=bind,source="$(pwd)"/docker-mount,target=/app/docker-mount \
 tobor
 ```
 
 ### Run tests locally
 
-TODO
+`npm run test`
 
 ### Run the application locally
 
-TODO
+**Serve with nodemon**
+
+`npm run serve`
+
+**Build and Run**
+
+`npm run build && npm run start`
 
 ## Design discussion
 

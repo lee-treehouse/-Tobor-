@@ -5,7 +5,7 @@ export const getDefaultTestConfig = (): AppConfig => {
         tobor: {
             input: {
                 format: {
-                    capitaliseCommandsAndArgs: true,
+                    capitaliseCommandsAndArgs: false,
                 },
             },
         },
