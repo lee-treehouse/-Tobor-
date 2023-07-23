@@ -62,6 +62,10 @@ tobor
 
 ### Run the application locally
 
+**Provide configuration if desired**
+
+`cp .env.example .env`
+
 **Serve with nodemon**
 
 `npm run serve`

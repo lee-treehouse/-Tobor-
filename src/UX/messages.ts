@@ -1,7 +1,7 @@
-export const TOBOR_WELCOME = "Hi, I'm Tobor. I can help you move an imaginary robot around an imaginary table.";
+export const TOBOR_WELCOME = "Hi, I'm Tobor. I can help you move an imaginary robot around an imaginary table.\n";
 
 export const TOBOR_HELP_TEXT =
-    "Permitted commands are LEFT, MOVE, PLACE, REPORT, and RIGHT.\nPLACE command takes three arguments (X coordinate, Y coordinate, Direction) eg 'PLACE 1,2,NORTH'";
+    "Permitted commands are LEFT, MOVE, PLACE, REPORT, and RIGHT.\nPLACE command takes three arguments (X coordinate, Y coordinate, Direction) eg 'PLACE 1,2,NORTH'\n";
 
 export const TOBOR_COMMAND_PROMPT = "Please enter a command or type 'EXIT' to exit the application.";
 

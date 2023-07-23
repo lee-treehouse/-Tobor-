@@ -123,5 +123,4 @@ describe("Config derived from process.env", () => {
         }
     );
 });
-
-//TODO add not set cases
+// TODO add tests for when specific env vars are unset

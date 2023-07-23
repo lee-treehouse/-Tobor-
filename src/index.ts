@@ -21,6 +21,7 @@ export const run = async () => {
         await service.readInput();
     } catch (error) {
         handleError(error);
+        process.exit();
     }
 };
 

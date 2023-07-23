@@ -27,6 +27,7 @@ export class ToborService {
     };
 
     public readInput = async () => {
+        // TODO refactor to use an interface + factory + add tests
         if (this.config.input.fileName) {
             const fileReadingService = new FileReadingService(this.config.input.fileName);
             await fileReadingService.processFileLineByLine(this.onReadInput);
