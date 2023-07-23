@@ -16,7 +16,7 @@ describe("Execute", () => {
     expect(result).toBe(undefined);
   });
 
-  it.only("Should call process.exit", () => {
+  it("Should call process.exit", () => {
     const exitCommand = new ExitCommand([]);
     exitCommand.execute();
     expect(mockExit).toHaveBeenCalled();
