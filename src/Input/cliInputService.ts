@@ -1,4 +1,4 @@
-import * as readline from "node:readline/promises";
+import * as readline from "node:readline";
 import { TOBOR_COMMAND_PROMPT, TOBOR_HELP_TEXT, TOBOR_WELCOME } from "../UX/messages";
 import { LineReader } from "./LineReader";
 import { Logger } from "../Output/Logger";
