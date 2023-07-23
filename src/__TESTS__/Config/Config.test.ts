@@ -1,11 +1,9 @@
 import { getConfig, getDefaultConfig } from "../../Config/Config";
 
-// approach to process.env mocking as described here https://webtips.dev/how-to-mock-processenv-in-jest
 describe("Config derived from process.env", () => {
   const env = process.env;
 
   beforeEach(() => {
-    jest.resetModules();
     process.env = { ...env };
   });
   afterEach(() => {

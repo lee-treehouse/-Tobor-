@@ -1,12 +1,10 @@
 import { run } from "../server";
 
-// approach to process.env mocking as described here https://webtips.dev/how-to-mock-processenv-in-jest
-describe("Integration tests from fixtures", () => {
+describe("E2E tests from fixtures", () => {
   const env = process.env;
   let consoleSpy: jest.SpyInstance;
 
   beforeEach(() => {
-    jest.resetModules();
     process.env = { ...env };
     consoleSpy = jest.spyOn(console, "log");
   });
