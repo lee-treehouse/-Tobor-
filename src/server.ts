@@ -1,5 +1,5 @@
 import { getConfig } from "./Config/Config";
-import { ToborService } from "./Services/xToborService";
+import { ToborService } from "./Services/ToborService";
 import { Table } from "./Common/Table";
 import { TOBOR_ERROR_PREFIX } from "./UX/messages";
 
