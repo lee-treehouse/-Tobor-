@@ -1,4 +1,4 @@
-# -Tobor-
+# Tobor
 
 Tobor is Robot spelt backwards.
 
@@ -47,7 +47,7 @@ docker build --tag tobor .
 **Run**
 
 ```bash
-docker run tobor
+docker run -it tobor
 ```
 
 **Run and supply environment variables**
