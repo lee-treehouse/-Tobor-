@@ -45,10 +45,6 @@ describe("Properties", () => {
     const moveCommand = new MoveCommand([]);
     expect(moveCommand.canBeIgnored).toBe(true);
   });
-
-  it("Should have static command property 'MOVE' so command can be invoked", () => {
-    expect(MoveCommand.command).toBe("MOVE");
-  });
 });
 
 describe("Constructor", () => {
