@@ -1,11 +1,12 @@
 import * as readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import { TOBOR_COMMAND_PROMPT, TOBOR_HELP_TEXT, TOBOR_WELCOME } from "../UX/messages";
+import { LineReader } from "./LineReader";
 
 const LOOP_UNTIL_EXIT_COMMAND = true;
 
-export class cliInputService {
-  public async requestInputLineByLine(onReadLine: (line: string) => Promise<void>) {
+export class cliInputService implements LineReader {
+  public async getInputLineByLine(onReadLine: (line: string) => Promise<void>) {
     const rl = readline.createInterface({ input, output });
 
     console.log(TOBOR_WELCOME);

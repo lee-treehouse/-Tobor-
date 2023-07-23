@@ -4,8 +4,7 @@ import { Command } from "../Commands/Command";
 import { ToborConfig } from "../Config/Config";
 import { Position, defaultPosition } from "../Common/Position";
 import { Table } from "../Common/Table";
-import { cliInputService } from "./cliInputService";
-import { FileReadingService } from "./FileReadingService";
+import { getLineReader } from "../Input/LineReaderFactory";
 
 export class ToborService {
   public robotPosition: Position | "OFF" = "OFF";
@@ -26,13 +25,7 @@ export class ToborService {
   };
 
   public readInput = async () => {
-    // TODO refactor to use an interface + factory + add tests
-    if (this.config.input.fileName) {
-      const fileReadingService = new FileReadingService(this.config.input.fileName);
-      await fileReadingService.processFileLineByLine(this.onReadInput);
-    } else {
-      const inputService = new cliInputService();
-      await inputService.requestInputLineByLine(this.onReadInput);
-    }
+    const lineReader = getLineReader(this.config.input.fileName);
+    await lineReader.getInputLineByLine(this.onReadInput);
   };
 }
