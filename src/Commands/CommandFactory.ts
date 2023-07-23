@@ -22,5 +22,5 @@ export const getCommand = (input: CommandInput): ICommand => {
         case DirectionChange.RIGHT:
             return new ChangeDirectionCommand(args, command);
     }
-    throw new Error(`${input} ${COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX}`);
+    throw new Error(`${input.command} ${COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX}`);
 };
