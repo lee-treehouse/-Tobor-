@@ -1,6 +1,7 @@
 import { Position } from "../Common/Position";
 import { throwNoArgumentsExpected } from "./CommandInput";
 import { Command } from "./Command";
+import { CommandResult } from "./CommandResult";
 
 export class ReportCommand implements Command {
   public static command = "REPORT";
@@ -11,8 +12,8 @@ export class ReportCommand implements Command {
     if (args && args.length > 0) throwNoArgumentsExpected({ args, command: ReportCommand.command });
   }
 
-  public execute(currentPosition: Position): Position | void {
+  public execute(currentPosition: Position): CommandResult {
     const { directionFacing, coordinates } = currentPosition;
-    console.log(`${coordinates.x},${coordinates.y},${directionFacing}`);
+    return `${coordinates.x},${coordinates.y},${directionFacing}`;
   }
 }

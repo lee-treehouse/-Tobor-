@@ -4,21 +4,11 @@ import { getCommand } from "../../Commands/CommandFactory";
 import { ReportCommand } from "../../Commands/Report";
 
 describe("Execute", () => {
-  it("Should not return anything", () => {
-    const reportCommand = getCommand({ command: "REPORT", args: [] });
-    const currentPosition: Position = { coordinates: { x: 3, y: 5 }, directionFacing: CompassDirection.NORTH };
-    const result = reportCommand.execute(currentPosition);
-    expect(result).toBe(undefined);
-  });
-
-  it("Should console.log Position in specific format", () => {
+  it("Should return string in specific format", () => {
     const reportCommand = getCommand({ command: "REPORT", args: [] });
     const currentPosition: Position = { coordinates: { x: 3, y: 5 }, directionFacing: CompassDirection.WEST };
-
-    const consoleSpy = jest.spyOn(console, "log");
-
-    reportCommand.execute(currentPosition);
-    expect(consoleSpy).toHaveBeenCalledWith("3,5,WEST");
+    const result = reportCommand.execute(currentPosition);
+    expect(result).toBe("3,5,WEST");
   });
 });
 

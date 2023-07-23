@@ -5,6 +5,7 @@ import { ToborConfig } from "../Config/Config";
 import { Position, defaultPosition } from "../Common/Position";
 import { Table } from "../Common/Table";
 import { getLineReader } from "../Input/LineReaderFactory";
+import { CommandResult, isPosition } from "../Commands/CommandResult";
 
 export class ToborService {
   public robotPosition: Position | "OFF" = "OFF";
@@ -13,15 +14,32 @@ export class ToborService {
 
   public onReadInput = async (line: string): Promise<void> => {
     const commandInput = separateCommandAndArguments(line, this.config.input.format.capitaliseCommandsAndArgs);
+
+    // TODO make it so a parser error at this stage can be supressed
     const command: Command = getCommand(commandInput);
 
     if (this.robotPosition === "OFF" && command.canBeIgnored) return Promise.resolve();
 
-    const newPosition = command.execute(this.robotPosition !== "OFF" ? this.robotPosition : defaultPosition);
+    const commandResult = command.execute(this.robotPosition !== "OFF" ? this.robotPosition : defaultPosition);
 
-    if (newPosition && !this.table.areCoordinatesOutOfBounds(newPosition.coordinates)) this.robotPosition = newPosition;
+    this.processCommandResult(commandResult);
 
     Promise.resolve();
+  };
+
+  private processCommandResult = (commandResult: CommandResult) => {
+    if (!commandResult) return;
+
+    if (isPosition(commandResult)) {
+      this.processNewPosition(commandResult as Position);
+      return;
+    }
+    // TODO inject output log
+    console.log(commandResult);
+  };
+
+  private processNewPosition = (newPosition: Position) => {
+    if (!this.table.areCoordinatesOutOfBounds(newPosition.coordinates)) this.robotPosition = newPosition;
   };
 
   public readInput = async () => {

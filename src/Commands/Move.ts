@@ -2,6 +2,7 @@ import { directionIsNorthOrEast, directionIsNorthOrSouth } from "../Common/Compa
 import { Position } from "../Common/Position";
 import { throwNoArgumentsExpected } from "./CommandInput";
 import { Command } from "./Command";
+import { CommandResult } from "./CommandResult";
 
 export class MoveCommand implements Command {
   public static command = "MOVE";
@@ -12,11 +13,11 @@ export class MoveCommand implements Command {
     if (args && args.length > 0) throwNoArgumentsExpected({ args, command: MoveCommand.command });
   }
 
-  public execute(currentPosition: Position): Position | void {
+  public execute(currentPosition: Position): CommandResult {
     return this.getNewPosition(currentPosition);
   }
 
-  private getNewPosition = (currentPosition: Position): Position => {
+  private getNewPosition = (currentPosition: Position): CommandResult => {
     const { coordinates, directionFacing } = currentPosition;
 
     const axisToChange = directionIsNorthOrSouth(directionFacing) ? "Y" : "X";

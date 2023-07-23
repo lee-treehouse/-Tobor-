@@ -3,6 +3,7 @@ import { DirectionChange } from "../Common/DirectionChange";
 import { Position } from "../Common/Position";
 import { throwNoArgumentsExpected } from "./CommandInput";
 import { Command } from "./Command";
+import { CommandResult } from "./CommandResult";
 
 export class ChangeDirectionCommand implements Command {
   public readonly canBeIgnored = true;
@@ -13,7 +14,7 @@ export class ChangeDirectionCommand implements Command {
     if (args && args.length > 0) throwNoArgumentsExpected({ args, command });
   }
 
-  public execute(currentPosition: Position): Position | void {
+  public execute(currentPosition: Position): CommandResult {
     const { directionFacing, coordinates } = currentPosition;
 
     const newPosition: Position = {

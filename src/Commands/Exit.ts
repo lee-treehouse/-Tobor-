@@ -1,6 +1,6 @@
-import { Position } from "../Common/Position";
 import { throwNoArgumentsExpected } from "./CommandInput";
 import { Command } from "./Command";
+import { CommandResult } from "./CommandResult";
 
 export class ExitCommand implements Command {
   public static command = "EXIT";
@@ -11,7 +11,7 @@ export class ExitCommand implements Command {
     if (args && args.length > 0) throwNoArgumentsExpected({ args, command: ExitCommand.command });
   }
 
-  public execute(): Position | void {
+  public execute(): CommandResult {
     process.exit();
   }
 }

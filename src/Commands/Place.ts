@@ -3,6 +3,7 @@ import { parseCoordinates } from "../Common/Coordinates";
 import { Position } from "../Common/Position";
 import { COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3 } from "../ErrorMessages/Parsing";
 import { Command } from "./Command";
+import { CommandResult } from "./CommandResult";
 
 export class PlaceCommand implements Command {
   public static command = "PLACE";
@@ -18,7 +19,7 @@ export class PlaceCommand implements Command {
     this.position = { coordinates, directionFacing };
   }
 
-  public execute(): Position | void {
+  public execute(): CommandResult {
     return this.position;
   }
 }
