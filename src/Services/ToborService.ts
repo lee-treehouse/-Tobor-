@@ -6,11 +6,16 @@ import { Position, defaultPosition } from "../Common/Position";
 import { Table } from "../Common/Table";
 import { getLineReader } from "../Input/LineReaderFactory";
 import { CommandResult, isPosition } from "../Commands/CommandResult";
+import { Logger } from "../Output/Logger";
 
 export class ToborService {
   public robotPosition: Position | "OFF" = "OFF";
 
-  public constructor(private readonly config: ToborConfig, private readonly table: Table) {}
+  public constructor(
+    private readonly config: ToborConfig,
+    private readonly table: Table,
+    private readonly logger: Logger
+  ) {}
 
   public onReadInput = async (line: string): Promise<void> => {
     const commandInput = separateCommandAndArguments(line, this.config.input.format.capitaliseCommandsAndArgs);
@@ -34,8 +39,7 @@ export class ToborService {
       this.processNewPosition(commandResult as Position);
       return;
     }
-    // TODO inject output log
-    console.log(commandResult);
+    this.logger.log(commandResult);
   };
 
   private processNewPosition = (newPosition: Position) => {
@@ -43,7 +47,7 @@ export class ToborService {
   };
 
   public readInput = async () => {
-    const lineReader = getLineReader(this.config.input.fileName);
+    const lineReader = getLineReader(this.logger, this.config.input.fileName);
     await lineReader.getInputLineByLine(this.onReadInput);
   };
 }

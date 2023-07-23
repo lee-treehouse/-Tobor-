@@ -3,18 +3,21 @@ import { Position } from "../../Common/Position";
 import { Table } from "../../Common/Table";
 import { getDefaultTestConfig } from "../TestFiles/Config/DefaultTestConfig";
 import { ToborService } from "../../Services/ToborService";
+import { getLogger } from "../../Output/LoggerFactory";
 
+const USE_SILENT_LOGGER = true;
 const config = getDefaultTestConfig();
 const table = new Table(config.table);
+const logger = getLogger(USE_SILENT_LOGGER);
 let service: ToborService;
 
 describe("onReadInput", () => {
   beforeEach(() => {
-    service = new ToborService(config.tobor, table);
+    service = new ToborService(config.tobor, table, logger);
   });
 
   it("Should not have position change or console.log from commands that can be ignored when robot is not on table", async () => {
-    const consoleSpy = jest.spyOn(console, "log");
+    const loggerSpy = jest.spyOn(logger, "log");
 
     await service.onReadInput("MOVE");
     expect(service.robotPosition).toBe("OFF");
@@ -28,11 +31,11 @@ describe("onReadInput", () => {
     await service.onReadInput("REPORT");
     expect(service.robotPosition).toBe("OFF");
 
-    expect(consoleSpy).not.toHaveBeenCalled();
+    expect(loggerSpy).not.toHaveBeenCalled();
   });
 
   it("Should have position change or console.log from commands that can be ignored when robot is on table", async () => {
-    const consoleSpy = jest.spyOn(console, "log");
+    const loggerSpy = jest.spyOn(logger, "log");
 
     await service.onReadInput("PLACE 0,0,NORTH");
 
@@ -45,7 +48,7 @@ describe("onReadInput", () => {
 
     await service.onReadInput("REPORT");
 
-    expect(consoleSpy).toHaveBeenCalledWith(`0,1,NORTH`);
+    expect(loggerSpy).toHaveBeenCalledWith(`0,1,NORTH`);
   });
 
   it("Should have position change from command that can't be ignored when robot is not on table", async () => {
