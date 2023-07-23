@@ -11,15 +11,14 @@ export const COULD_NOT_PARSE_ARGUMENTS_TO_COMMAND_NONE_EXPECTED = (args: string[
 
 // Commands - place
 
+const PLACE_THREE_ARGUMENTS_EXPECTED = `Three arguments are expected (X coordinate, Y coordinate, Direction) eg '1,2,NORTH'.`;
+
 export const COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3 = (args: string[]) => {
   if (args.length === 0) return COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3_RECEIVED_NONE;
-  return `${args.join(
-    ","
-  )} could not be parsed as arguments to PLACE command. Three arguments are expected (X coordinate, Y coordinate, Direction) eg '1,2,NORTH'.`;
+  return `${args.join(",")} could not be parsed as arguments to PLACE command. ${PLACE_THREE_ARGUMENTS_EXPECTED}`;
 };
 
-export const COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3_RECEIVED_NONE =
-  "Could not parse arguments to PLACE command. Three arguments are expected (X coordinate, Y coordinate, Direction) eg '1,2,NORTH'.";
+export const COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3_RECEIVED_NONE = `Could not parse arguments to PLACE command. ${PLACE_THREE_ARGUMENTS_EXPECTED}`;
 
 //  Coordinates
 
