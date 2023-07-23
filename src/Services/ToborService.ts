@@ -5,7 +5,7 @@ import { ToborConfig } from "../Config/Config";
 import { Position, defaultPosition } from "../Common/Position";
 import { Table } from "../Common/Table";
 import { cliInputService } from "./cliInputService";
-import { FileReadingService } from "./xFileReadingService";
+import { FileReadingService } from "./FileReadingService";
 
 export class ToborService {
   public robotPosition: Position | "OFF" = "OFF";
