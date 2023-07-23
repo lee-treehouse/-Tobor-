@@ -1,11 +1,10 @@
 import { CompassDirection } from "../../Common/CompassDirection";
 import { Position } from "../../Common/Position";
-import { getCommand } from "../../Commands/CommandFactory";
 import { MoveCommand } from "../../Commands/Move";
 
 describe("Execute", () => {
   it("Should return a Position with the same direction as the input position", () => {
-    const moveCommand = getCommand({ command: "MOVE", args: [] });
+    const moveCommand = new MoveCommand([]);
     const currentPosition: Position = { coordinates: { x: 3, y: 5 }, directionFacing: CompassDirection.NORTH };
     const result = moveCommand.execute(currentPosition);
     expect(result).toEqual(expect.objectContaining({ directionFacing: currentPosition.directionFacing }));
@@ -43,7 +42,7 @@ describe("Execute", () => {
 
 describe("Properties", () => {
   it("Should be able to be ignored eg if item is not placed on a table", () => {
-    const moveCommand = getCommand({ command: "MOVE", args: [] });
+    const moveCommand = new MoveCommand([]);
     expect(moveCommand.canBeIgnored).toBe(true);
   });
 
@@ -54,7 +53,7 @@ describe("Properties", () => {
 
 describe("Constructor", () => {
   it("Should throw specific error message when constructed with arguments", () => {
-    const constructor = () => getCommand({ command: "MOVE", args: ["ARG"] });
+    const constructor = () => new MoveCommand(["ARG"]);
     expect(constructor).toThrow(
       "ARG could not be parsed as arguments to MOVE command. No arguments should be supplied."
     );
