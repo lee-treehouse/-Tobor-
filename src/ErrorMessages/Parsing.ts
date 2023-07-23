@@ -1,10 +1,8 @@
 // Commands - general
 
-import { commandList } from "../Commands/CommandList";
+import { FORMATTED_COMMAND_LIST } from "../UX/messages";
 
-export const COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX = `could not be parsed as a command. Value should be one of ${commandList.join(
-  ", "
-)}.`;
+export const COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX = `could not be parsed as a command. Value should be one of ${FORMATTED_COMMAND_LIST}.`;
 
 export const COULD_NOT_PARSE_ARGUMENTS_TO_COMMAND_NONE_EXPECTED = (args: string[], command: string) =>
   `${args.join(",")} could not be parsed as arguments to ${command} command. No arguments should be supplied.`;

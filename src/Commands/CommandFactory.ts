@@ -7,6 +7,7 @@ import { Command } from "./Command";
 import { MoveCommand } from "./Move";
 import { PlaceCommand } from "./Place";
 import { ReportCommand } from "./Report";
+import { ExitCommand } from "./Exit";
 
 export const getCommand = (input: CommandInput): Command => {
   const { command, args } = input;
@@ -14,6 +15,8 @@ export const getCommand = (input: CommandInput): Command => {
   switch (command) {
     case MoveCommand.command:
       return new MoveCommand(args);
+    case ExitCommand.command:
+      return new ExitCommand(args);
     case PlaceCommand.command:
       return new PlaceCommand(args);
     case ReportCommand.command:
