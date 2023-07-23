@@ -13,7 +13,7 @@ const handleError = (error: unknown) => {
     console.log(message);
 };
 
-const run = async () => {
+export const run = async () => {
     try {
         const config = getConfig();
         const table = new Table(config.table);
