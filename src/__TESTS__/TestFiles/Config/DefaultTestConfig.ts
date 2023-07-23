@@ -4,6 +4,9 @@ export const getDefaultTestConfig = (): AppConfig => {
   return {
     tobor: {
       input: {
+        parser: {
+          exitOnCommandParserError: false,
+        },
         format: {
           capitaliseCommandsAndArgs: false,
         },

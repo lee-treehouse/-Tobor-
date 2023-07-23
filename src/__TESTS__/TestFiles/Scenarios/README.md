@@ -8,14 +8,9 @@
 
 provide the example inputs specified in `INSTRUCTIONS.md` in the root of this project.
 
-- `Configuration/instructions_example3_lowercase.txt`
+- `instructions_example3_lowercase.txt`
 
 provides the instructions from 'instructions_example3.txt' with the command and its' arguments in lowercase. 
-
-- `Errors/instructions_example1_missing_arguments.txt`
-
-provides the instructions from 'instructions_example1.txt' with missing arguments from the PLACE command. 
-
 
 ### Example 1
 
@@ -61,7 +56,7 @@ Expected output: 3,3,NORTH
 
 ## Explore table boundaries
 
-- `Configuration/explore_table_boundaries.txt`
+- `explore_table_boundaries.txt`
 
 provides instructions that allow the table boundaries to be accessed and reoprted on. For a default 5 x 5 table, these instructions will
 

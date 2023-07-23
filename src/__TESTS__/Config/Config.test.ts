@@ -80,6 +80,9 @@ describe("Config derived from process.env", () => {
     expect(config).toEqual({
       tobor: {
         input: {
+          parser: {
+            exitOnCommandParserError: false,
+          },
           format: {
             capitaliseCommandsAndArgs: false,
           },

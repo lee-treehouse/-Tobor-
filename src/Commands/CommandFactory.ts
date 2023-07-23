@@ -8,6 +8,7 @@ import { MoveCommand } from "./Move";
 import { PlaceCommand } from "./Place";
 import { ReportCommand } from "./Report";
 import { ExitCommand } from "./Exit";
+import { CommandParserError } from "./CommandParserError";
 
 export const getCommand = (input: CommandInput): Command => {
   const { command, args } = input;
@@ -25,5 +26,5 @@ export const getCommand = (input: CommandInput): Command => {
     case DirectionChange.RIGHT:
       return new ChangeDirectionCommand(args, command);
   }
-  throw new Error(`${input.command} ${COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX}`);
+  throw new CommandParserError(`${input.command} ${COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX}`);
 };

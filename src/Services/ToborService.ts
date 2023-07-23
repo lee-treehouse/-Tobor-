@@ -7,6 +7,7 @@ import { Table } from "../Common/Table";
 import { getLineReader } from "../Input/LineReaderFactory";
 import { CommandResult, isPosition } from "../Commands/CommandResult";
 import { Logger } from "../Output/Logger";
+import { CommandParserError } from "../Commands/CommandParserError";
 
 export class ToborService {
   public robotPosition: Position | "OFF" = "OFF";
@@ -20,14 +21,17 @@ export class ToborService {
   public onReadInput = async (line: string): Promise<void> => {
     const commandInput = separateCommandAndArguments(line, this.config.input.format.capitaliseCommandsAndArgs);
 
-    // TODO make it so a parser error at this stage can be supressed
-    const command: Command = getCommand(commandInput);
+    try {
+      const command: Command = getCommand(commandInput);
+      if (this.robotPosition === "OFF" && command.canBeIgnored) return Promise.resolve();
+      const commandResult = command.execute(this.robotPosition !== "OFF" ? this.robotPosition : defaultPosition);
+      this.processCommandResult(commandResult);
+    } catch (error) {
+      const exitOnCommandParserError = this.config.input.parser.exitOnCommandParserError;
+      const errorIsCommandParserError = error instanceof CommandParserError;
 
-    if (this.robotPosition === "OFF" && command.canBeIgnored) return Promise.resolve();
-
-    const commandResult = command.execute(this.robotPosition !== "OFF" ? this.robotPosition : defaultPosition);
-
-    this.processCommandResult(commandResult);
+      if (exitOnCommandParserError || !errorIsCommandParserError) throw error;
+    }
 
     Promise.resolve();
   };

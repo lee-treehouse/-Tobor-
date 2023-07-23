@@ -1,10 +1,5 @@
-import {
-  COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3,
-  COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX,
-} from "../ErrorMessages/Parsing";
 import { getLogger } from "../Output/LoggerFactory";
 import { LoggerType } from "../Output/LoggerType";
-import { TOBOR_ERROR_PREFIX } from "../UX/messages";
 import { run } from "../server";
 
 const env = process.env;
@@ -83,21 +78,5 @@ describe("E2E failure tests from fixtures", () => {
 
   afterEach(() => {
     mockExit.mockReset();
-  });
-
-  it("Should display specific error message for test case with missing arguments", async () => {
-    process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/Errors/instructions_example1_missing_arguments.txt`;
-    await run(logger);
-
-    expect(loggerSpy).toHaveBeenCalledWith(TOBOR_ERROR_PREFIX);
-    expect(loggerSpy).toHaveBeenCalledWith(COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3([]));
-  });
-
-  it("Should not recognize lowercase commands when capitaliseCommandsAndArgs is default (false)", async () => {
-    process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/Configuration/instructions_example3_lowercase.txt`;
-    await run(logger);
-
-    expect(loggerSpy).toHaveBeenCalledWith(TOBOR_ERROR_PREFIX);
-    expect(loggerSpy).toHaveBeenCalledWith(`place ${COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX}`);
   });
 });

@@ -18,6 +18,9 @@ export interface TableConfig {
 export interface ToborConfig {
   input: {
     fileName?: string;
+    parser: {
+      exitOnCommandParserError: boolean;
+    };
     format: {
       capitaliseCommandsAndArgs: boolean;
     };
@@ -65,6 +68,9 @@ export const getDefaultConfig = (): AppConfig => {
   return {
     tobor: {
       input: {
+        parser: {
+          exitOnCommandParserError: false,
+        },
         format: {
           capitaliseCommandsAndArgs: false,
         },

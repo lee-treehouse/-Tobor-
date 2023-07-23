@@ -1,4 +1,5 @@
 import { COULD_NOT_PARSE_ARGUMENTS_TO_COMMAND_NONE_EXPECTED } from "../ErrorMessages/Parsing";
+import { CommandParserError } from "./CommandParserError";
 
 export type CommandInput = {
   command: string;
@@ -18,5 +19,5 @@ export const separateCommandAndArguments = (input: string, capitaliseCommandsAnd
 };
 
 export const throwNoArgumentsExpected = (input: CommandInput) => {
-  throw new Error(COULD_NOT_PARSE_ARGUMENTS_TO_COMMAND_NONE_EXPECTED(input.args, input.command));
+  throw new CommandParserError(COULD_NOT_PARSE_ARGUMENTS_TO_COMMAND_NONE_EXPECTED(input.args, input.command));
 };
