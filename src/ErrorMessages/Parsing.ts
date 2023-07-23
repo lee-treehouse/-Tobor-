@@ -1,7 +1,10 @@
 // Commands - general
 
-export const COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX =
-  "could not be parsed as a command. Value should be LEFT, MOVE, PLACE, REPORT, or RIGHT.";
+import { commandList } from "../Commands/CommandList";
+
+export const COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX = `could not be parsed as a command. Value should be one of ${commandList.join(
+  ", "
+)}.`;
 
 export const COULD_NOT_PARSE_ARGUMENTS_TO_COMMAND_NONE_EXPECTED = (args: string[], command: string) =>
   `${args.join(",")} could not be parsed as arguments to ${command} command. No arguments should be supplied.`;
