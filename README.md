@@ -15,6 +15,7 @@ You may configure the following settings in the application with environment var
 | TABLE_HEIGHT | 5 | Sets the table height. TABLE_WIDTH must also be set. |
 | TABLE_WIDTH | 5 | Sets the table width. TABLE_HEIGHT must also be set. |
 | CAPITALISE_COMMANDS_AND_ARGS | false | Allows case insensitive parsing of commands and arguments. |
+| EXIT_ON_COMMAND_PARSER_ERROR | false | Allows the program to display error message and exit when a command is invalid and cannot be parsed. |
 | FILENAME | not set | Allows commands to be entered from file rather than CLI. |
 
 
@@ -57,6 +58,7 @@ docker run \
 -e TABLE_WIDTH=5 \
 -e TABLE_HEIGHT=5 \
 -e CAPITALISE_COMMANDS_AND_ARGS=true \
+-e EXIT_ON_COMMAND_PARSER_ERROR=true \
 --mount type=bind,source="$(pwd)"/docker-mount,target=/app/docker-mount \
 tobor
 ```
@@ -89,17 +91,11 @@ I chose to impose a constraint that all commands and arguments should be modelle
 
 Where integer input is required, I am allowing any input that I can parse as an integer in base 10 that doesn't violate the entity's requirements. Eg decimal input is allowed.
 
-When invalid input is received, I am advising the user of the problem and then exiting the program. 
-
 ## Next steps 
 
 Increase test coverage for CLI Input Reader, will require mocking cli input.
 
-Introduce setting that allows continuing the program when invalid input is received. Make parser errors a custom type of error so they can be recovered from in tobor service. Give line readers an interactive property so I can default to continuing when interactive is true and not when interactive is false. 
-
-Extend logger interface so I can cache what has been logged and check that in tests instead of needing to spy.
-
-Consdier split up the output of the tobor service (eg REPORT command) and output that is necessary for user interaction like CLI interaction. 
+Consider splitting up the output of the tobor service (eg REPORT command) and output that is necessary for user interaction like CLI interaction. 
 
 
 

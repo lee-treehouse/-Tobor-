@@ -35,6 +35,7 @@ export const getConfig = () => {
     TABLE_WIDTH: tableWidth,
     FILENAME: fileName,
     CAPITALISE_COMMANDS_AND_ARGS: capitaliseCommandsAndArgs,
+    EXIT_ON_COMMAND_PARSER_ERROR: exitOnCommandParserError,
   } = process.env;
 
   if (tableHeight && tableWidth) {
@@ -59,6 +60,12 @@ export const getConfig = () => {
     const upperCase = capitaliseCommandsAndArgs.toUpperCase();
     if (upperCase === "TRUE" || upperCase === "FALSE")
       config.tobor.input.format.capitaliseCommandsAndArgs = upperCase === "TRUE";
+  }
+
+  if (exitOnCommandParserError) {
+    const upperCase = exitOnCommandParserError.toUpperCase();
+    if (upperCase === "TRUE" || upperCase === "FALSE")
+      config.tobor.input.parser.exitOnCommandParserError = upperCase === "TRUE";
   }
 
   return config;
