@@ -6,11 +6,11 @@
 - `instructions_example2.txt`
 - `instructions_example3.txt`
 
-provide the example inputs specified in `INSTRUCTIONS.md` in the root of this project. Files containing the expected result are colocated with an `_expected`` suffix eg `instructions_example1_expected.txt``
+provide the example inputs specified in `INSTRUCTIONS.md` in the root of this project.
 
 - `Configuration/instructions_example3_lowercase.txt`
 
-provides the instructions from 'instructions_example3.txt' with the command and its' arguments in lowercase. Expected results are available from files with the `expected_if_capitalise` and `expected_if_not_capitalise` suffix in their filename. 
+provides the instructions from 'instructions_example3.txt' with the command and its' arguments in lowercase. 
 
 ### Example 1
 
