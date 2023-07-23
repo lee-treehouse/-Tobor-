@@ -35,7 +35,7 @@ describe("E2E success cases from fixtures", () => {
   );
 
   it("Should recognize commands when capitaliseCommandsAndArgs is default(true)", async () => {
-    process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/Configuration/instructions_example3_lowercase.txt`;
+    process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/instructions_example3_lowercase.txt`;
     process.env.CAPITALISE_COMMANDS_AND_ARGS = "true";
     await run(logger);
 
@@ -57,7 +57,7 @@ describe("E2E success cases from fixtures", () => {
   test.each(exploreBoundaryCases)(
     "Should explore table boundaries with varied output depending on table size",
     async ({ tableWidth, tableHeight, output }) => {
-      process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/Configuration/explore_table_boundaries.txt`;
+      process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/explore_table_boundaries.txt`;
       process.env.TABLE_WIDTH = tableWidth;
       process.env.TABLE_HEIGHT = tableHeight;
       await run(logger);
@@ -69,14 +69,15 @@ describe("E2E success cases from fixtures", () => {
   );
 });
 
-describe("E2E failure tests from fixtures", () => {
-  let mockExit: jest.SpyInstance;
+// TODO add tests here that test EXIT_ON_COMMAND_PARSER_ERROR configuration e2e
+// describe("E2E failure tests from fixtures", () => {
+//   let mockExit: jest.SpyInstance;
 
-  beforeEach(() => {
-    mockExit = jest.spyOn(process, "exit").mockImplementation();
-  });
+//   beforeEach(() => {
+//     mockExit = jest.spyOn(process, "exit").mockImplementation();
+//   });
 
-  afterEach(() => {
-    mockExit.mockReset();
-  });
-});
+//   afterEach(() => {
+//     mockExit.mockReset();
+//   });
+// });
