@@ -4,10 +4,12 @@ export class FileReadingService {
     public constructor(private readonly filename: string) {}
 
     handleError = (error: unknown) => {
-        let message = "Unknown Error";
-        if (error instanceof Error) message = error.message;
-        console.log(TOBOR_FILE_HANDLING_ERROR_PREFIX);
-        console.log(message);
+        if (error instanceof Error) {
+            error.message = `${TOBOR_FILE_HANDLING_ERROR_PREFIX}${error.message}`;
+            throw error;
+        } else {
+            throw new Error(`${TOBOR_FILE_HANDLING_ERROR_PREFIX}Unknown Error`);
+        }
     };
 
     public async processFileLineByLine(onReadLine: (line: string) => Promise<void>) {
