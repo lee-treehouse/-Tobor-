@@ -1,18 +1,20 @@
+import { COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3 } from "../ErrorMessages/Parsing";
+import { TOBOR_ERROR_PREFIX } from "../UX/messages";
 import { run } from "../server";
 
-describe("E2E tests from fixtures", () => {
-  const env = process.env;
-  let consoleSpy: jest.SpyInstance;
+const env = process.env;
+let consoleSpy: jest.SpyInstance;
 
-  beforeEach(() => {
-    process.env = { ...env };
-    consoleSpy = jest.spyOn(console, "log");
-  });
-  afterEach(() => {
-    process.env = env;
-    consoleSpy.mockReset();
-  });
+beforeEach(() => {
+  process.env = { ...env };
+  consoleSpy = jest.spyOn(console, "log");
+});
+afterEach(() => {
+  process.env = env;
+  consoleSpy.mockReset();
+});
 
+describe("E2E success from fixtures", () => {
   const validTestCases = [
     { fileName: "instructions_example1.txt", expected: "0,1,NORTH" },
     { fileName: "instructions_example2.txt", expected: "0,0,WEST" },
@@ -29,18 +31,23 @@ describe("E2E tests from fixtures", () => {
       expect(true).toBeTruthy();
     }
   );
+});
 
-  // it("Should display specific error message for test case with missing arguments", async () => {
-  //     process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/Errors/instructions_example1_missing_arguments.txt`;
+describe("E2E failure tests from fixtures", () => {
+  let mockExit: jest.SpyInstance;
 
-  //     await run();
-  //     //       expect(consoleSpy).toHaveBeenCalledTimes(1);
+  beforeEach(() => {
+    mockExit = jest.spyOn(process, "exit").mockImplementation();
+  });
 
-  //     //"Gosh, there's been an error. Here is what I know about it - I hope this helps!"
+  afterEach(() => {
+    mockExit.mockReset();
+  });
 
-  //     expect(consoleSpy).toHaveBeenCalledWith(
-  //         "Could not parse arguments to PLACE command. Three arguments are expected (X coordinate, Y coordinate, Direction) eg '1,2,NORTH'."
-  //     );
-  //     expect(true).toBeTruthy();
-  // });
+  it("Should display specific error message for test case with missing arguments", async () => {
+    process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/Errors/instructions_example1_missing_arguments.txt`;
+    await run();
+    expect(consoleSpy).toHaveBeenCalledWith(TOBOR_ERROR_PREFIX);
+    expect(consoleSpy).toHaveBeenCalledWith(COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3([]));
+  });
 });
