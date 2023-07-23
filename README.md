@@ -10,11 +10,17 @@ Additionally, Tobor is my submission for a coding test. The instructions can be 
 
 You may configure the following settings in the application with environment variables.
 
-- Table width and height (via `TABLE_HEIGHT` and `TABLE_WIDTH` env vars - both must be set to override the default behaviour)
-- Case insensitive processing of inputs (via `CAPITALISE_COMMANDS_AND_ARGS` env var)
-- Reading input from file or interactively in CLI (via `FILENAME` env var)
+| Env Var | Default Value | Description |
+| --- | --- | --- |
+| TABLE_HEIGHT | 5 | Sets the table height. TABLE_WIDTH must also be set. |
+| TABLE_WIDTH | 5 | Sets the table width. TABLE_HEIGHT must also be set. |
+| CAPITALISE_COMMANDS_AND_ARGS | false | Allows case insensitive parsing of commands and arguments. |
+| FILENAME | not set | Allows commands to be entered from file rather than CLI. |
 
- A convenient input to exercise many features of the application is `docker-mount/fixtures/explore_table_boundaries.txt` and is documented in `docker-mount/fixtures/`.
+
+**Filename Input** 
+
+ A convenient input file to exercise many features of the application is `docker-mount/fixtures/explore_table_boundaries.txt` and is documented in `docker-mount/fixtures/`.
 
 Other sample files to exercise the application can be sourced from `src/__TESTS__/TestFiles/Scenarios` and are documented in `src/__TESTS__/TestFiles/Scenarios/README.md`.
 
