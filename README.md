@@ -63,9 +63,13 @@ tobor
 
 ### Run tests locally
 
+`npm install`
+
 `npm run test`
 
 ### Run the application locally
+
+`npm install`
 
 **Provide configuration (optional)**
 
