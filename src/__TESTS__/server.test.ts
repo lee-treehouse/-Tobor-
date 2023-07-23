@@ -1,4 +1,7 @@
-import { COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3 } from "../ErrorMessages/Parsing";
+import {
+  COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3,
+  COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX,
+} from "../ErrorMessages/Parsing";
 import { TOBOR_ERROR_PREFIX } from "../UX/messages";
 import { run } from "../server";
 
@@ -31,6 +34,13 @@ describe("E2E success from fixtures", () => {
       expect(true).toBeTruthy();
     }
   );
+
+  it("Should recognize commands when capitaliseCommandsAndArgs is default(true)", async () => {
+    process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/Configuration/instructions_example3_lowercase.txt`;
+    process.env.CAPITALISE_COMMANDS_AND_ARGS = "true";
+    await run();
+    expect(consoleSpy).toHaveBeenCalledWith("3,3,NORTH");
+  });
 });
 
 describe("E2E failure tests from fixtures", () => {
@@ -49,5 +59,12 @@ describe("E2E failure tests from fixtures", () => {
     await run();
     expect(consoleSpy).toHaveBeenCalledWith(TOBOR_ERROR_PREFIX);
     expect(consoleSpy).toHaveBeenCalledWith(COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3([]));
+  });
+
+  it("Should not recognize commands when capitaliseCommandsAndArgs is default(false)", async () => {
+    process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/Configuration/instructions_example3_lowercase.txt`;
+    await run();
+    expect(consoleSpy).toHaveBeenCalledWith(TOBOR_ERROR_PREFIX);
+    expect(consoleSpy).toHaveBeenCalledWith(`place ${COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX}`);
   });
 });
