@@ -34,8 +34,7 @@ See below for instructions for each of these ways to exercise the application.
 
 ### System requirements
 
-TODO
-
+Node 18 
 ### Build and run the application in a docker container
 
 **Build**
@@ -68,7 +67,7 @@ tobor
 
 ### Run the application locally
 
-**Provide configuration if desired**
+**Provide configuration (optional)**
 
 `cp .env.example .env`
 
@@ -87,3 +86,14 @@ I chose to impose a constraint that all commands and arguments should be modelle
 Where integer input is required, I am allowing any input that I can parse as an integer in base 10 that doesn't violate the entity's requirements. Eg decimal input is allowed.
 
 When invalid input is received, I am advising the user of the problem and then exiting the program. 
+
+## Next steps 
+
+Increase test coverage for CLI Input Reader, will require mocking cli input.
+
+Introduce setting that allows continuing the program when invalid input is received. Make parser errors a type of error so they can be recovered from in tobor service. Give line readers an interactive property so I can default to continuing when interactive is true and not when interactive is false. 
+
+Extend logger interface so I can cache what has been logged and check that in tests instead of needing to spy.
+
+
+
