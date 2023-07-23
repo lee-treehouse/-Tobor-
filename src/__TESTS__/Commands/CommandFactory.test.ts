@@ -25,7 +25,7 @@ describe("Command Factory", () => {
         const input = { command: "DANCE", args: [] };
         const factory = () => getCommand(input);
         expect(factory).toThrow(
-            `${input} could not be parsed as a command. Value should be LEFT, MOVE, PLACE, REPORT, or RIGHT.`
+            `DANCE could not be parsed as a command. Value should be LEFT, MOVE, PLACE, REPORT, or RIGHT.`
         );
     });
 });
