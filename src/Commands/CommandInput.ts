@@ -1,22 +1,22 @@
 import { COULD_NOT_PARSE_ARGUMENTS_TO_COMMAND_NONE_EXPECTED } from "../ErrorMessages/Parsing";
 
 export type CommandInput = {
-    command: string;
-    args: string[];
+  command: string;
+  args: string[];
 };
 
-export const separateCommandAndArguments = (input: string, capitaliseCommandsAndArgs: boolean) => {
-    const capitalizedInput = input.toUpperCase();
-    const tokens = (capitaliseCommandsAndArgs ? capitalizedInput : input).split(" ");
-    const command = tokens && tokens.length > 0 ? tokens[0] : "";
-    const args = tokens && tokens.length > 1 ? tokens[1].split(",") : [];
+// TODO have this be a static method on the class
+export const separateCommandAndArguments = (input: string, capitaliseCommandsAndArgs: boolean): CommandInput => {
+  const tokens = (capitaliseCommandsAndArgs ? input.toUpperCase() : input).split(" ");
+  const command = tokens.length > 0 ? tokens[0] : "";
+  const args = tokens.length > 1 ? tokens[1].split(",") : [];
 
-    return {
-        command,
-        args,
-    };
+  return {
+    command,
+    args,
+  };
 };
 
-export const throwNoArgumentsExpected = (args: string[], command: string) => {
-    throw new Error(COULD_NOT_PARSE_ARGUMENTS_TO_COMMAND_NONE_EXPECTED(args, command));
+export const throwNoArgumentsExpected = (input: CommandInput) => {
+  throw new Error(COULD_NOT_PARSE_ARGUMENTS_TO_COMMAND_NONE_EXPECTED(input.args, input.command));
 };

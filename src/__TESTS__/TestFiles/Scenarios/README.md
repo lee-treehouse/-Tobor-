@@ -19,7 +19,6 @@ PLACE 0,0,NORTH
 MOVE
 REPORT
 Output: 0,1,NORTH
-Expected output: 3,3,NORTH
 ```
 
 ### Example 2
@@ -29,7 +28,6 @@ PLACE 0,0,NORTH
 LEFT
 REPORT
 Output: 0,0,WEST
-Expected output: 3,3,NORTH
 ```
 
 ### Example 3
