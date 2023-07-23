@@ -22,24 +22,16 @@ export class ChangeDirectionCommand implements Command {
     };
     return newPosition;
   }
-
   private getNextDirection(directionFacing: CompassDirection) {
-    return this.command === DirectionChange.LEFT
-      ? this.getNextDirectionLeft(directionFacing)
-      : this.getNextDirectionRight(directionFacing);
+    const offset = this.command === DirectionChange.LEFT ? -1 : 1;
+    return this.getNextDirectionByOffset(directionFacing, offset);
   }
 
-  private getNextDirectionLeft(currentDirection: CompassDirection): CompassDirection {
-    if (currentDirection === CompassDirection.NORTH) return CompassDirection.WEST;
-    if (currentDirection === CompassDirection.WEST) return CompassDirection.SOUTH;
-    if (currentDirection === CompassDirection.SOUTH) return CompassDirection.EAST;
-    return CompassDirection.NORTH;
-  }
+  private getNextDirectionByOffset(directionFacing: CompassDirection, offset: number): CompassDirection {
+    const directions = [CompassDirection.NORTH, CompassDirection.EAST, CompassDirection.SOUTH, CompassDirection.WEST];
 
-  private getNextDirectionRight(currentDirection: CompassDirection): CompassDirection {
-    if (currentDirection === CompassDirection.NORTH) return CompassDirection.EAST;
-    if (currentDirection === CompassDirection.EAST) return CompassDirection.SOUTH;
-    if (currentDirection === CompassDirection.SOUTH) return CompassDirection.WEST;
-    return CompassDirection.NORTH;
+    const currentIndex = directions.indexOf(directionFacing);
+    const nextIndex = (currentIndex + directions.length + offset) % directions.length;
+    return directions[nextIndex];
   }
 }

@@ -84,6 +84,6 @@ tobor
 
 I chose to impose a constraint that all commands and arguments should be modelled in uppercase. This allows me to easily allow for case insensitivity by offering the `capitaliseCommandsAndArgs` configuration.
 
-I chose to implement compass directions (and turning LEFT or RIGHT from a compass direction) in the way that was easiest for the reader to understand. If more compass directions were to be modelled (like NORTH-WEST, NORTH-EAST, SOUTH-WEST, SOUTH-EAST) I'd suggest modifying `getNextDirectionLeft` and `getNextDirectionRight` to be one function that can cycle forward or backwards through an array of compass directions derived from the enum. If compass directions are to be more granular than that, an object that holds the name of the compass direction and the angle in degrees might be a better data structure.
-
 Where integer input is required, I am allowing any input that I can parse as an integer in base 10 that doesn't violate the entity's requirements. Eg decimal input is allowed.
+
+When invalid input is received, I am advising the user of the problem and then exiting the program. 
