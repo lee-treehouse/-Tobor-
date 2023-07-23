@@ -4,15 +4,15 @@ import { getCommand } from "../../Commands/CommandFactory";
 import { PlaceCommand } from "../../Commands/Place";
 
 describe("Execute", () => {
-  it("Should return a Position with direction facing and coordinates as specified in the command arguments", () => {
+  it("Should return the requested position regardless of current position", () => {
     const placeCommand = getCommand({ command: "PLACE", args: ["1", "2", "NORTH"] });
     const expectedResult = { coordinates: { x: 1, y: 2 }, directionFacing: CompassDirection.NORTH };
 
-    const firstPosition: Position = { coordinates: { x: 3, y: 5 }, directionFacing: CompassDirection.SOUTH };
-    const secondPosition: Position = { coordinates: { x: 5, y: 3 }, directionFacing: CompassDirection.EAST };
+    const currentPosition: Position = { coordinates: { x: 3, y: 5 }, directionFacing: CompassDirection.SOUTH };
+    const laterCurrentPosition: Position = { coordinates: { x: 5, y: 3 }, directionFacing: CompassDirection.EAST };
 
-    expect(placeCommand.execute(firstPosition)).toEqual(expectedResult);
-    expect(placeCommand.execute(secondPosition)).toEqual(expectedResult);
+    expect(placeCommand.execute(currentPosition)).toEqual(expectedResult);
+    expect(placeCommand.execute(laterCurrentPosition)).toEqual(expectedResult);
   });
 });
 
