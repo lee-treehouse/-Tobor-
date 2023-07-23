@@ -3,12 +3,12 @@ import {
   COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX,
 } from "../ErrorMessages/Parsing";
 import { getLogger } from "../Output/LoggerFactory";
+import { LoggerType } from "../Output/LoggerType";
 import { TOBOR_ERROR_PREFIX } from "../UX/messages";
 import { run } from "../server";
 
-const USE_SILENT_LOGGER = true;
 const env = process.env;
-const logger = getLogger(USE_SILENT_LOGGER);
+const logger = getLogger(LoggerType.SILENT);
 let loggerSpy: jest.SpyInstance;
 
 beforeEach(() => {

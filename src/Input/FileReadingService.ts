@@ -1,7 +1,7 @@
 import { open } from "node:fs/promises";
 import { LineReader } from "../Input/LineReader";
 export class FileReadingService implements LineReader {
-  public constructor(private readonly filename: string, logger: Logger) {}
+  public constructor(private readonly filename: string) {}
 
   public async getInputLineByLine(onReadLine: (line: string) => Promise<void>) {
     let file;

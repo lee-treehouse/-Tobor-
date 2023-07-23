@@ -4,11 +4,11 @@ import { Table } from "../../Common/Table";
 import { getDefaultTestConfig } from "../TestFiles/Config/DefaultTestConfig";
 import { ToborService } from "../../Services/ToborService";
 import { getLogger } from "../../Output/LoggerFactory";
+import { LoggerType } from "../../Output/LoggerType";
 
-const USE_SILENT_LOGGER = true;
 const config = getDefaultTestConfig();
 const table = new Table(config.table);
-const logger = getLogger(USE_SILENT_LOGGER);
+const logger = getLogger(LoggerType.SILENT);
 let service: ToborService;
 
 describe("onReadInput", () => {
