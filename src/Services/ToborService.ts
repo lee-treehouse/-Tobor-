@@ -40,7 +40,7 @@ export class ToborService {
     if (!commandResult) return;
 
     if (isPosition(commandResult)) {
-      this.processNewPosition(commandResult as Position);
+      this.processNewPosition(commandResult);
       return;
     }
     this.logger.log(commandResult);
