@@ -26,7 +26,7 @@ describe("CLI Input Service", () => {
     mockExit.mockReset();
   });
 
-  it("Should produce correct result for scenario desribed in TestFiles instructions_example3.txt", async () => {
+  it("Should produce correct result for scenario described in TestFiles instructions_example3.txt", async () => {
     const getNextLineMock = jest
       .spyOn(service, "readLineAsync")
       .mockImplementationOnce(async () => Promise.resolve("PLACE 1,2,EAST"))
