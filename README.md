@@ -12,10 +12,10 @@ You may configure the following settings in the application with environment var
 
 | Env Var | Default Value | Description |
 | --- | --- | --- |
-| TABLE_HEIGHT | 5 | Sets the table height. TABLE_WIDTH must also be set. |
-| TABLE_WIDTH | 5 | Sets the table width. TABLE_HEIGHT must also be set. |
-| CAPITALISE_COMMANDS_AND_ARGS | false | Allows case insensitive parsing of commands and arguments. |
-| EXIT_ON_COMMAND_PARSER_ERROR | false | Allows the program to display error message and exit when a command is invalid and cannot be parsed. |
+| TABLE_LENGTH | 5 | Sets the TABLE_LENGTH. TABLE_WIDTH must also be set. |
+| TABLE_WIDTH | 5 | Sets the table width. TABLE_LENGTH must also be set. |
+| CAPITALISE_COMMANDS_AND_ARGS | false | When true, input commands and arguments will be capitalised to allow for case insensitive parsing - all commands and args are uppercase.  |
+| EXIT_ON_COMMAND_PARSER_ERROR | false | When true, the program will display a detailed error message and exit when a command is invalid and cannot be parsed. |
 | FILENAME | not set | Allows commands to be entered from file rather than CLI. |
 
 
@@ -56,7 +56,7 @@ docker run -it tobor
 docker run \
 -e FILENAME=/app/docker-mount/fixtures/explore_table_boundaries.txt \
 -e TABLE_WIDTH=5 \
--e TABLE_HEIGHT=5 \
+-e TABLE_LENGTH=5 \
 -e CAPITALISE_COMMANDS_AND_ARGS=true \
 -e EXIT_ON_COMMAND_PARSER_ERROR=true \
 --mount type=bind,source="$(pwd)"/docker-mount,target=/app/docker-mount \
@@ -93,9 +93,8 @@ Where integer input is required, I am allowing any input that I can parse as an 
 
 ## Next steps 
 
-Increase test coverage for CLI Input Reader, will require mocking cli input.
+Increase test coverage for CLI Input Reader.
 
 Consider splitting up the output of the tobor service (eg REPORT command) and output that is necessary for user interaction like CLI interaction. 
-
 
 

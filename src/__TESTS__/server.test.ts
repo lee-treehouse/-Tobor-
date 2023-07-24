@@ -50,21 +50,21 @@ describe("E2E success cases from fixtures", () => {
   const exploreBoundaryCases = [
     {
       tableWidth: "5",
-      tableHeight: "5",
+      tableLength: "5",
       output: ["0,4,NORTH", "0,4,NORTH", "4,4,EAST", "4,4,EAST", "4,0,SOUTH", "4,0,SOUTH", "0,0,WEST"],
     },
     {
       tableWidth: "6",
-      tableHeight: "6",
+      tableLength: "6",
       output: ["0,4,NORTH", "0,5,NORTH", "4,5,EAST", "5,5,EAST", "5,1,SOUTH", "5,0,SOUTH", "1,0,WEST"],
     },
   ];
   test.each(exploreBoundaryCases)(
     "Should explore table boundaries with varied output depending on table size",
-    async ({ tableWidth, tableHeight, output }) => {
+    async ({ tableWidth, tableLength, output }) => {
       process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/explore_table_boundaries.txt`;
       process.env.TABLE_WIDTH = tableWidth;
-      process.env.TABLE_HEIGHT = tableHeight;
+      process.env.TABLE_LENGTH = tableLength;
       await run(logger);
 
       output.forEach((item) => {

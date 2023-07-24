@@ -31,10 +31,10 @@ export const COULD_NOT_PARSE_COORDINATES_BELOW_ZERO_SUFFIX =
 export const COULD_NOT_PARSE_COMPASS_DIRECTION_SUFFIX =
   "could not be parsed as compass direction. Value should be NORTH, SOUTH, EAST or WEST.";
 
-// Table Height and Width
+// TABLE_LENGTH and Width
 
-export const TABLE_HEIGHT_AND_TABLE_WIDTH_MUST_BE_NUMERIC_SUFFIX =
+export const TABLE_LENGTH_AND_TABLE_WIDTH_MUST_BE_NUMERIC_SUFFIX =
   "could not be parsed as table size. Values should be numeric.";
 
-export const TABLE_HEIGHT_AND_TABLE_WIDTH_BELOW_ONE_SUFFIX =
+export const TABLE_LENGTH_AND_TABLE_WIDTH_BELOW_ONE_SUFFIX =
   "could not be parsed as table size. Values should be one or greater.";

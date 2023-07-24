@@ -7,7 +7,7 @@ export class Table {
   areCoordinatesOutOfBounds = (coordinates: Coordinates) => {
     if (coordinates.x < 0 || coordinates.y < 0) return true;
     if (coordinates.x > this.config.size.width - 1) return true;
-    if (coordinates.y > this.config.size.height - 1) return true;
+    if (coordinates.y > this.config.size.length - 1) return true;
     return false;
   };
 }

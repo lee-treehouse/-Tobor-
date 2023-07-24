@@ -11,32 +11,32 @@ describe("Config derived from process.env", () => {
   });
 
   it("Should set table config when table dimensions are specified", () => {
-    process.env.TABLE_HEIGHT = "6";
+    process.env.TABLE_LENGTH = "6";
     process.env.TABLE_WIDTH = "9";
 
     const config = getConfig();
 
-    expect(config.table.size.height).toBe(6);
+    expect(config.table.size.length).toBe(6);
     expect(config.table.size.width).toBe(9);
   });
 
   const nonNumericTableInputCases = [
     {
-      height: "foo",
+      length: "foo",
       width: "4",
       expected: "foo, 4 could not be parsed as table size. Values should be numeric.",
     },
     {
-      height: "5",
+      length: "5",
       width: "bar",
       expected: "5, bar could not be parsed as table size. Values should be numeric.",
     },
   ];
 
   test.each(nonNumericTableInputCases)(
-    "Should throw specific error messages on non numeric input for table Height or Width when the other dimension is specified",
-    ({ height, width, expected }) => {
-      process.env.TABLE_HEIGHT = height;
+    "Should throw specific error messages on non numeric input for TABLE_LENGTH or Width when the other dimension is specified",
+    ({ length, width, expected }) => {
+      process.env.TABLE_LENGTH = length;
       process.env.TABLE_WIDTH = width;
       const configFunction = () => getConfig();
       expect(configFunction).toThrow(expected);
@@ -45,21 +45,21 @@ describe("Config derived from process.env", () => {
 
   const belowOneTableInputCases = [
     {
-      height: "0",
+      length: "0",
       width: "4",
       expected: "0, 4 could not be parsed as table size. Values should be one or greater.",
     },
     {
-      height: "5",
+      length: "5",
       width: "-3",
       expected: "5, -3 could not be parsed as table size. Values should be one or greater.",
     },
   ];
 
   test.each(belowOneTableInputCases)(
-    "Should throw specific error messages on below one input for table Height or Width when the other dimension is specified",
-    ({ height, width, expected }) => {
-      process.env.TABLE_HEIGHT = height;
+    "Should throw specific error messages on below one input for TABLE_LENGTH or Width when the other dimension is specified",
+    ({ length, width, expected }) => {
+      process.env.TABLE_LENGTH = length;
       process.env.TABLE_WIDTH = width;
       const configFunction = () => getConfig();
       expect(configFunction).toThrow(expected);
@@ -91,7 +91,7 @@ describe("Config derived from process.env", () => {
       table: {
         size: {
           width: 5,
-          height: 5,
+          length: 5,
         },
       },
     });

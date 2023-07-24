@@ -15,7 +15,7 @@ export const getDefaultTestConfig = (): AppConfig => {
     table: {
       size: {
         width: 5,
-        height: 5,
+        length: 5,
       },
     },
   };
