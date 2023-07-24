@@ -1,3 +1,4 @@
+import { CommandParserError } from "../Commands/CommandParserError";
 import { COULD_NOT_PARSE_COMPASS_DIRECTION_SUFFIX } from "../ErrorMessages/Parsing";
 
 export enum CompassDirection {
@@ -19,5 +20,5 @@ export const directionIsNorthOrEast = (direction: CompassDirection) =>
 
 export const parseCompassDirection = (direction: string): CompassDirection => {
   if (isCompassDirection(direction)) return direction;
-  throw new Error(`${direction} ${COULD_NOT_PARSE_COMPASS_DIRECTION_SUFFIX}`);
+  throw new CommandParserError(`${direction} ${COULD_NOT_PARSE_COMPASS_DIRECTION_SUFFIX}`);
 };
