@@ -123,4 +123,32 @@ describe("Config derived from process.env", () => {
       );
     }
   );
+
+  const exitOnCommandParserErrorValidCases = [
+    { value: "true", result: true },
+    { value: "TRUE", result: true },
+    { value: "false", result: false },
+    { value: "FALSE", result: false },
+  ];
+  test.each(exitOnCommandParserErrorValidCases)(
+    "Should set exit on command parser error to $value when value $value is provided",
+    ({ value, result }) => {
+      process.env.EXIT_ON_COMMAND_PARSER_ERROR = value;
+      const config = getConfig();
+
+      expect(config.tobor.input.parser.exitOnCommandParserError).toBe(result);
+    }
+  );
+
+  const exitOnCommandParserErrorInvalidCases = [{ value: "foo" }, { value: "1" }, { value: "yes" }, { value: "" }];
+  test.each(exitOnCommandParserErrorInvalidCases)(
+    "Should not override exit on command parser error default value when invalid value $value is provided",
+    ({ value }) => {
+      process.env.EXIT_ON_COMMAND_PARSER_ERROR = value;
+      const config = getConfig();
+      expect(config.tobor.input.parser.exitOnCommandParserError).toBe(
+        getDefaultConfig().tobor.input.parser.exitOnCommandParserError
+      );
+    }
+  );
 });
