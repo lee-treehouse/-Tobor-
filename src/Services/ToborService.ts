@@ -31,6 +31,7 @@ export class ToborService {
       const errorIsCommandParserError = error instanceof CommandParserError;
 
       if (exitOnCommandParserError || !errorIsCommandParserError) throw error;
+      if (!exitOnCommandParserError && errorIsCommandParserError) this.logger.log(error.message);
     }
 
     Promise.resolve();
