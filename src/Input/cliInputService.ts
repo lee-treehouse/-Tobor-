@@ -22,15 +22,13 @@ export class cliInputService implements LineReader {
     });
   };
 
-  // this is the one I would want to mock
-  // public async getNextLine(): Promise<string | void> {
-  //   return this.readLineAsync();
-  // }
-
   public async getInputLineByLine(onReadLine: (line: string) => Promise<void>) {
     this.logger.log(TOBOR_WELCOME);
     this.logger.log(TOBOR_HELP_TEXT);
 
+    // in tests, we mock process.exit so reading user input would never actually exit
+    // by making userInput type include void we can have our mock return undefined
+    // and break out of this loop.
     let userInput: string | void = "";
     while (LOOP_UNTIL_EXIT_COMMAND && userInput !== undefined) {
       this.logger.log(`${TOBOR_COMMAND_PROMPT}`);

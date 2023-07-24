@@ -1,5 +1,10 @@
+import {
+  COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3,
+  COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX,
+} from "../ErrorMessages/Parsing";
 import { getLogger } from "../Output/LoggerFactory";
 import { LoggerType } from "../Output/LoggerType";
+import { TOBOR_ERROR_PREFIX } from "../UX/messages";
 import { run } from "../server";
 
 const env = process.env;
@@ -34,7 +39,7 @@ describe("E2E success cases from fixtures", () => {
     }
   );
 
-  it("Should recognize commands when capitaliseCommandsAndArgs is default(true)", async () => {
+  it("Should recognize lowercase commands when capitalise commands and args is true", async () => {
     process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/instructions_example3_lowercase.txt`;
     process.env.CAPITALISE_COMMANDS_AND_ARGS = "true";
     await run(logger);
@@ -70,14 +75,33 @@ describe("E2E success cases from fixtures", () => {
 });
 
 // TODO add tests here that test EXIT_ON_COMMAND_PARSER_ERROR configuration e2e
-// describe("E2E failure tests from fixtures", () => {
-//   let mockExit: jest.SpyInstance;
+describe("E2E failure tests from fixtures", () => {
+  let mockExit: jest.SpyInstance;
 
-//   beforeEach(() => {
-//     mockExit = jest.spyOn(process, "exit").mockImplementation();
-//   });
+  beforeEach(() => {
+    mockExit = jest.spyOn(process, "exit").mockImplementation();
+  });
 
-//   afterEach(() => {
-//     mockExit.mockReset();
-//   });
-// });
+  afterEach(() => {
+    mockExit.mockReset();
+  });
+
+  it("Should display specific error message for test case with missing arguments and exit on command parser error setting true", async () => {
+    process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/instructions_example1_missing_arguments.txt`;
+    process.env.EXIT_ON_COMMAND_PARSER_ERROR = "true";
+    await run(logger);
+
+    expect(loggerSpy).toHaveBeenCalledWith(TOBOR_ERROR_PREFIX);
+    expect(loggerSpy).toHaveBeenCalledWith(COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3([]));
+  });
+
+  it("Should display specific error message for test case with lowercase commands when capitalise commands and args is false and exit on command parser error setting true", async () => {
+    process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/instructions_example3_lowercase.txt`;
+    process.env.CAPITALISE_COMMANDS_AND_ARGS = "false";
+    process.env.EXIT_ON_COMMAND_PARSER_ERROR = "true";
+    await run(logger);
+
+    expect(loggerSpy).toHaveBeenCalledWith(TOBOR_ERROR_PREFIX);
+    expect(loggerSpy).toHaveBeenCalledWith(`place ${COULD_NOT_PARSE_UNRECOGNIZED_COMMAND_SUFFIX}`);
+  });
+});
