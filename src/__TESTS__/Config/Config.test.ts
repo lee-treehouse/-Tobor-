@@ -104,7 +104,7 @@ describe("Config derived from process.env", () => {
     { value: "FALSE", result: false },
   ];
   test.each(capitaliseCommandAndArgsValidCases)(
-    "Should set capitalise commands and args to $expected when value $value is provided",
+    "Should set capitalise commands and args to $value when value $value is provided",
     ({ value, result }) => {
       process.env.CAPITALISE_COMMANDS_AND_ARGS = value;
       const config = getConfig();
