@@ -8,7 +8,7 @@ const LOOP_UNTIL_EXIT_COMMAND = true;
 export class cliInputService implements LineReader {
   public constructor(private readonly logger: Logger) {}
 
-  private readLineAsync = async (): Promise<string> => {
+  public readLineAsync = async (): Promise<string | void> => {
     const rl = readline.createInterface({
       input: process.stdin,
     });
@@ -23,20 +23,20 @@ export class cliInputService implements LineReader {
   };
 
   // this is the one I would want to mock
-  public async getNextLine() {
-    const result = await this.readLineAsync();
-    return result;
-  }
+  // public async getNextLine(): Promise<string | void> {
+  //   return this.readLineAsync();
+  // }
 
   public async getInputLineByLine(onReadLine: (line: string) => Promise<void>) {
     this.logger.log(TOBOR_WELCOME);
     this.logger.log(TOBOR_HELP_TEXT);
 
-    while (LOOP_UNTIL_EXIT_COMMAND) {
+    let userInput: string | void = "";
+    while (LOOP_UNTIL_EXIT_COMMAND && userInput !== undefined) {
       this.logger.log(`${TOBOR_COMMAND_PROMPT}`);
-      const userInput = await this.getNextLine();
+      userInput = await this.readLineAsync();
 
-      await onReadLine(userInput);
+      if (userInput) await onReadLine(userInput);
     }
   }
 }

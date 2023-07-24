@@ -1,6 +1,6 @@
 import { Table } from "../../Common/Table";
 import { getLogger } from "../../Output/LoggerFactory";
-//import { LoggerType } from "../../Output/LoggerType";
+// import { LoggerType } from "../../Output/LoggerType";
 import { ToborService } from "../../Services/ToborService";
 import { cliInputService } from "../../Input/cliInputService";
 //import { getConfig } from "../../Config/Config";
@@ -16,14 +16,15 @@ const toborService = new ToborService(config.tobor, table, logger);
 
 const service = new cliInputService(logger);
 const getNextLineMock = jest
-  .spyOn(service, "getNextLine")
-  .mockImplementationOnce(() => Promise.resolve("PLACE 1,2,EAST"))
-  .mockImplementationOnce(() => Promise.resolve("MOVE"))
-  .mockImplementationOnce(() => Promise.resolve("MOVE"))
-  .mockImplementationOnce(() => Promise.resolve("LEFT"))
-  .mockImplementationOnce(() => Promise.resolve("MOVE"))
-  .mockImplementationOnce(() => Promise.resolve("REPORT"))
-  .mockImplementationOnce(() => Promise.resolve("EXIT"));
+  .spyOn(service, "readLineAsync")
+  .mockImplementationOnce(async () => Promise.resolve("PLACE 1,2,EAST"))
+  .mockImplementationOnce(async () => Promise.resolve("MOVE"))
+  .mockImplementationOnce(async () => Promise.resolve("MOVE"))
+  .mockImplementationOnce(async () => Promise.resolve("LEFT"))
+  .mockImplementationOnce(async () => Promise.resolve("MOVE"))
+  .mockImplementationOnce(async () => Promise.resolve("REPORT"))
+  // exiting with void allows the test to finish running
+  .mockImplementation(async () => Promise.resolve());
 
 let mockExit: jest.SpyInstance;
 
@@ -39,25 +40,18 @@ describe("CLI Input Service", () => {
     mockExit.mockReset();
   });
 
-  it("Should something something example3.txt", () => {
-    service.getInputLineByLine(toborService.onReadInput);
+  it("Should something something example3.txt", async () => {
+    await service.getInputLineByLine(toborService.onReadInput);
+
+    // it might be working but I have to make it end.. since i'm mocking EXIT and stopping it from actually exiting.
 
     // I need to replace this function
     // getNextLine
     // to have it send stdin
 
-    // stdin.send("PLACE 1,2,EAST");
-    // stdin.send("MOVE");
-    // stdin.send("MOVE");
-    // stdin.send("LEFT");
-    // stdin.send("MOVE");
-    // stdin.send("REPORT");
-
-    // // TODO this needs further thought as the output/prompt is going to be spied on too
+    expect(loggerSpy).toHaveBeenCalledWith("3,3,NORTH");
 
     expect(getNextLineMock).toHaveBeenCalledTimes(7);
-
-    expect(loggerSpy).toHaveBeenCalledWith("3,3,NORTH");
   });
 
   // it("Should something something example3.txt lowercase", () => {
