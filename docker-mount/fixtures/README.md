@@ -2,7 +2,7 @@
 
 - `explore_table_boundaries.txt`
 
-provides instructions that allow the table boundaries to be accessed and reoprted on. These instructions will
+provides instructions that allow the table boundaries to be accessed and reported on. These instructions will
 
 - start at the South West corner
 - MOVE North to the North West corner and REPORT

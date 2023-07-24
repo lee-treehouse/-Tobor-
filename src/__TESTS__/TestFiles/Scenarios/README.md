@@ -12,9 +12,9 @@ provide the example inputs specified in `INSTRUCTIONS.md` in the root of this pr
 
 provides the instructions from 'instructions_example3.txt' with the command and its' arguments in lowercase. This can be used to test the config options `CAPITALISE_COMMANDS_AND_ARGS` and `EXIT_ON_COMMAND_PARSER_ERROR`
 
-- `instructions_example3_lowercase.txt`
+- `instructions_example1_missing_arguments.txt`
 
-provides the instructions from 'instructions_example3.txt' with the command and its' arguments in lowercase. This can be used to test the config options and `EXIT_ON_COMMAND_PARSER_ERROR`
+provides the instructions from 'instructions_example3.txt' with the place command's arguments removed. This can be used to test the config option `EXIT_ON_COMMAND_PARSER_ERROR`
 
 
 ### Example 1
@@ -63,7 +63,7 @@ Expected output: 3,3,NORTH
 
 - `explore_table_boundaries.txt`
 
-provides instructions that allow the table boundaries to be accessed and reoprted on. For a default 5 x 5 table, these instructions will
+provides instructions that allow the table boundaries to be accessed and reported on. For a default 5 x 5 table, these instructions will
 
 - start at the South West corner
 - MOVE North to the North West corner and REPORT
