@@ -12,11 +12,11 @@ You may configure the following settings in the application with environment var
 
 | Env Var | Default Value | Description |
 | --- | --- | --- |
-| TABLE_LENGTH | 5 | Sets the TABLE_LENGTH. TABLE_WIDTH must also be set. |
+| TABLE_LENGTH | 5 | Sets the table length. TABLE_WIDTH must also be set. |
 | TABLE_WIDTH | 5 | Sets the table width. TABLE_LENGTH must also be set. |
 | CAPITALISE_COMMANDS_AND_ARGS | false | When true, input commands and arguments will be capitalised to allow for case insensitive parsing - all commands and args are uppercase.  |
-| EXIT_ON_COMMAND_PARSER_ERROR | false | When true, the program will display a detailed error message and exit when a command is invalid and cannot be parsed. |
-| FILENAME | not set | Allows commands to be entered from file rather than CLI. |
+| EXIT_ON_COMMAND_PARSER_ERROR | false | When true, the program will display a detailed error message and exit when a command is invalid and cannot be parsed. When false, invalid commands/args are ignored.|
+| FILENAME | not set | Allows commands to be read from a file rather than interactive CLI input. |
 
 
 **Filename Input** 
@@ -89,7 +89,7 @@ tobor
 
 I chose to impose a constraint that all commands and arguments should be modelled in uppercase. This allows me to easily allow for case insensitivity by offering the `capitaliseCommandsAndArgs` configuration.
 
-Where integer input is required, I am allowing any input that I can parse as an integer in base 10 that doesn't violate the entity's requirements. Eg decimal input is allowed.
+Where integer input is required, I am allowing any input that I can parse as an integer in base 10 that doesn't violate the entity's requirements. Eg decimal input is allowed, coordinates can't be below 0, table dimensions can't be less than 1. 
 
 ## Next steps 
 
