@@ -12,8 +12,8 @@ You may configure the following settings in the application with environment var
 
 | Env Var | Default Value | Description |
 | --- | --- | --- |
-| TABLE_LENGTH | 5 | Sets the table length. TABLE_WIDTH must also be set. |
-| TABLE_WIDTH | 5 | Sets the table width. TABLE_LENGTH must also be set. |
+| TABLE_LENGTH | 5 | Sets the table length. Ignored if TABLE_WIDTH is not set. |
+| TABLE_WIDTH | 5 | Sets the table width. Ignored if TABLE_LENGTH is not set. |
 | CAPITALISE_COMMANDS_AND_ARGS | false | When true, input commands and arguments will be capitalised to allow for case insensitive parsing - all commands and args are uppercase.  |
 | EXIT_ON_COMMAND_PARSER_ERROR | false | When true, the program will exit when a command is invalid and cannot be parsed. |
 | FILENAME | not set | Allows commands to be read from a file rather than interactive CLI input. |
@@ -21,7 +21,7 @@ You may configure the following settings in the application with environment var
 
 **Filename Input** 
 
- A convenient input file to exercise many features of the application is `docker-mount/fixtures/explore_table_boundaries.txt` and is documented in `docker-mount/fixtures/`.
+A convenient input file to exercise many features of the application is `docker-mount/fixtures/explore_table_boundaries.txt` and is documented in `docker-mount/fixtures/`.
 
 Other sample files to exercise the application can be sourced from `src/__TESTS__/TestFiles/Scenarios` and are documented in `src/__TESTS__/TestFiles/Scenarios/README.md`.
 
