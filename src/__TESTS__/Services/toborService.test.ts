@@ -16,7 +16,7 @@ describe("onReadInput", () => {
     service = new ToborService(config.tobor, table, logger);
   });
 
-  it("Should not have position change or console.log from commands that can be ignored when robot is not on table", async () => {
+  it("Should not have position change, or log from commands, that can be ignored when robot is not on table", async () => {
     const loggerSpy = jest.spyOn(logger, "log");
 
     await service.onReadInput("MOVE");
@@ -34,7 +34,7 @@ describe("onReadInput", () => {
     expect(loggerSpy).not.toHaveBeenCalled();
   });
 
-  it("Should have position change or log from commands that can be ignored when robot is on table", async () => {
+  it("Should have position change, or log from commands, that can be ignored when robot is on table", async () => {
     const loggerSpy = jest.spyOn(logger, "log");
 
     await service.onReadInput("PLACE 0,0,NORTH");
