@@ -1,18 +1,16 @@
 import { Table } from "../../Common/Table";
 import { getLogger } from "../../Output/LoggerFactory";
-// import { LoggerType } from "../../Output/LoggerType";
+import { LoggerType } from "../../Output/LoggerType";
 import { ToborService } from "../../Services/ToborService";
 import { cliInputService } from "../../Input/cliInputService";
-//import { getConfig } from "../../Config/Config";
-import { getDefaultTestConfig } from "../TestFiles/Config/DefaultTestConfig";
+import { getConfig } from "../../Config/Config";
 let loggerSpy: jest.SpyInstance;
 
 const env = process.env;
-const config = getDefaultTestConfig();
+const config = getConfig();
 const table = new Table(config.table);
-const logger = getLogger();
+const logger = getLogger(LoggerType.SILENT);
 const toborService = new ToborService(config.tobor, table, logger);
-
 const service = new cliInputService(logger);
 let mockExit: jest.SpyInstance;
 
@@ -28,7 +26,7 @@ describe("CLI Input Service", () => {
     mockExit.mockReset();
   });
 
-  it("Should produce correct result for scenario desribed in TestFiles example3.txt", async () => {
+  it("Should produce correct result for scenario desribed in TestFiles instructions_example3.txt", async () => {
     const getNextLineMock = jest
       .spyOn(service, "readLineAsync")
       .mockImplementationOnce(async () => Promise.resolve("PLACE 1,2,EAST"))
