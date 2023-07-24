@@ -6,7 +6,6 @@ export type CommandInput = {
   args: string[];
 };
 
-// TODO have this be a static method on the class
 export const separateCommandAndArguments = (input: string, capitaliseCommandsAndArgs: boolean): CommandInput => {
   const tokens = (capitaliseCommandsAndArgs ? input.toUpperCase() : input).split(" ");
   const command = tokens.length > 0 ? tokens[0] : "";

@@ -1,7 +1,5 @@
 import { COULD_NOT_PARSE_COMPASS_DIRECTION_SUFFIX } from "../ErrorMessages/Parsing";
 
-// TODO turn into a class
-
 export enum CompassDirection {
   NORTH = "NORTH",
   SOUTH = "SOUTH",

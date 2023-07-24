@@ -20,8 +20,6 @@ afterEach(() => {
   loggerSpy.mockReset();
 });
 
-// TODO improve test descriptions here
-
 describe("E2E success cases from fixtures", () => {
   const validTestCases = [
     { fileName: "instructions_example1.txt", expected: "0,1,NORTH" },
@@ -74,7 +72,6 @@ describe("E2E success cases from fixtures", () => {
   );
 });
 
-// TODO add tests here that test EXIT_ON_COMMAND_PARSER_ERROR configuration e2e
 describe("E2E failure tests from fixtures", () => {
   let mockExit: jest.SpyInstance;
 

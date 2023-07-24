@@ -9,7 +9,6 @@ export type Coordinates = {
   y: number;
 };
 
-// TODO should this count as a parser error?
 export const parseCoordinates = (X: string, Y: string): Coordinates => {
   const x = parseInt(X, 10);
   const y = parseInt(Y, 10);
