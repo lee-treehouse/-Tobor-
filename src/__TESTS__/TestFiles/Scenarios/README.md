@@ -10,7 +10,12 @@ provide the example inputs specified in `INSTRUCTIONS.md` in the root of this pr
 
 - `instructions_example3_lowercase.txt`
 
-provides the instructions from 'instructions_example3.txt' with the command and its' arguments in lowercase. 
+provides the instructions from 'instructions_example3.txt' with the command and its' arguments in lowercase. This can be used to test the config options `CAPITALISE_COMMANDS_AND_ARGS` and `EXIT_ON_COMMAND_PARSER_ERROR`
+
+- `instructions_example3_lowercase.txt`
+
+provides the instructions from 'instructions_example3.txt' with the command and its' arguments in lowercase. This can be used to test the config options and `EXIT_ON_COMMAND_PARSER_ERROR`
+
 
 ### Example 1
 
