@@ -15,7 +15,7 @@ You may configure the following settings in the application with environment var
 | TABLE_LENGTH | 5 | Sets the table length. TABLE_WIDTH must also be set. |
 | TABLE_WIDTH | 5 | Sets the table width. TABLE_LENGTH must also be set. |
 | CAPITALISE_COMMANDS_AND_ARGS | false | When true, input commands and arguments will be capitalised to allow for case insensitive parsing - all commands and args are uppercase.  |
-| EXIT_ON_COMMAND_PARSER_ERROR | false | When true, the program will display a detailed error message and exit when a command is invalid and cannot be parsed. When false, invalid commands/args are ignored.|
+| EXIT_ON_COMMAND_PARSER_ERROR | false | When true, the program will exit when a command is invalid and cannot be parsed. |
 | FILENAME | not set | Allows commands to be read from a file rather than interactive CLI input. |
 
 
