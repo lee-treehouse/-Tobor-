@@ -95,6 +95,6 @@ Where integer input is required, I am allowing any input that I can parse as an 
 
 Increase test coverage for CLI Input Reader.
 
-Consider splitting up the output of the tobor service (eg REPORT command) and output that is necessary for user interaction like CLI interaction. 
+Consider splitting up the output of the tobor service (eg REPORT command) and output that is necessary for user interaction like CLI interaction, error reporting. 
 
 
