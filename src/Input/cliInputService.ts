@@ -26,9 +26,6 @@ export class cliInputService implements LineReader {
     this.logger.log(TOBOR_WELCOME);
     this.logger.log(TOBOR_HELP_TEXT);
 
-    // in tests, we mock process.exit so reading user input would never actually exit
-    // by making userInput type include void we can have our mock return undefined
-    // and break out of this loop.
     let userInput: string | void = "";
     while (LOOP_UNTIL_EXIT_COMMAND && userInput !== undefined) {
       this.logger.log(`${TOBOR_COMMAND_PROMPT}`);
