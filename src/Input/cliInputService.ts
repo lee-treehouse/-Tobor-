@@ -22,13 +22,19 @@ export class cliInputService implements LineReader {
     });
   };
 
+  // this is the one I would want to mock
+  public async getNextLine() {
+    const result = await this.readLineAsync();
+    return result;
+  }
+
   public async getInputLineByLine(onReadLine: (line: string) => Promise<void>) {
     this.logger.log(TOBOR_WELCOME);
     this.logger.log(TOBOR_HELP_TEXT);
 
     while (LOOP_UNTIL_EXIT_COMMAND) {
       this.logger.log(`${TOBOR_COMMAND_PROMPT}`);
-      const userInput = await this.readLineAsync();
+      const userInput = await this.getNextLine();
 
       await onReadLine(userInput);
     }
