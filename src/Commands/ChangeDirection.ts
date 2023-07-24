@@ -23,6 +23,7 @@ export class ChangeDirectionCommand implements Command {
     };
     return newPosition;
   }
+
   private getNextDirection(directionFacing: CompassDirection) {
     const offset = this.command === DirectionChange.LEFT ? -1 : 1;
     return this.getNextDirectionByOffset(directionFacing, offset);
