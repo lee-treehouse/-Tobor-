@@ -55,8 +55,8 @@ docker run -it tobor
 ```bash
 docker run \
 -e FILENAME=/app/docker-mount/fixtures/explore_table_boundaries.txt \
--e TABLE_WIDTH=5 \
--e TABLE_LENGTH=5 \
+-e TABLE_WIDTH=6 \
+-e TABLE_LENGTH=6 \
 -e CAPITALISE_COMMANDS_AND_ARGS=true \
 -e EXIT_ON_COMMAND_PARSER_ERROR=true \
 --mount type=bind,source="$(pwd)"/docker-mount,target=/app/docker-mount \
