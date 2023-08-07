@@ -1,5 +1,6 @@
 import { ChangeDirectionCommand } from "../../Commands/ChangeDirection";
 import { getCommand } from "../../Commands/CommandFactory";
+import { DiagonalCommand } from "../../Commands/Diagonal";
 import { ExitCommand } from "../../Commands/Exit";
 import { MoveCommand } from "../../Commands/Move";
 import { PlaceCommand } from "../../Commands/Place";
@@ -14,6 +15,7 @@ describe("Command Factory", () => {
     { input: { command: "REPORT", args: [] }, classType: ReportCommand },
     { input: { command: "RIGHT", args: [] }, classType: ChangeDirectionCommand },
     { input: { command: "EXIT", args: [] }, classType: ExitCommand },
+    { input: { command: "DIAGONAL", args: [] }, classType: DiagonalCommand },
   ];
 
   test.each(validCases)(

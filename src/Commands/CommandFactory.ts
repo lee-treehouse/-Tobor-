@@ -9,11 +9,14 @@ import { PlaceCommand } from "./Place";
 import { ReportCommand } from "./Report";
 import { ExitCommand } from "./Exit";
 import { CommandParserError } from "./CommandParserError";
+import { DiagonalCommand } from "./Diagonal";
 
 export const getCommand = (input: CommandInput): Command => {
   const { command, args } = input;
 
   switch (command) {
+    case DiagonalCommand.command:
+      return new DiagonalCommand(args);
     case MoveCommand.command:
       return new MoveCommand(args);
     case ExitCommand.command:

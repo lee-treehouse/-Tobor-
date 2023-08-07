@@ -1,1 +1,1 @@
-export const commandList = ["EXIT", "LEFT", "MOVE", "PLACE", "REPORT", "RIGHT"];
+export const commandList = ["DIAGONAL", "EXIT", "LEFT", "MOVE", "PLACE", "REPORT", "RIGHT"];
