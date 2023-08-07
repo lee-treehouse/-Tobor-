@@ -6,6 +6,8 @@ Tobor is also a CLI application to help you move an imaginary robot (or other it
 
 Additionally, Tobor is my submission for a coding test. The instructions can be found in `INSTRUCTIONS.md`
 
+<!-- TODO create a supplement to INSTRUCTIONS.md explaining new behaviour eg commands introduced extending the instructions) -->
+
 ## Configuring the application
 
 You may configure the following settings in the application with environment variables.

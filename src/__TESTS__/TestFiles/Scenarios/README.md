@@ -16,6 +16,10 @@ provides the instructions from 'instructions_example3.txt' with the command and 
 
 provides the instructions from 'instructions_example3.txt' with the place command's arguments removed. This can be used to test the config option `EXIT_ON_COMMAND_PARSER_ERROR`
 
+- `instructions_example4.txt`
+
+provides the instructions from 'instructions_example3.txt' with additional instructions introducing the new DIAGONAL command, which takes an optional argument. 
+
 
 ### Example 1
 
@@ -68,8 +72,11 @@ MOVE
 LEFT
 MOVE
 DIAGONAL
+LEFT
+LEFT
+DIAGONAL 2
 REPORT
-Expected output: 4,4,NORTH
+Expected output: 2,2,SOUTH
 ```
 
 
