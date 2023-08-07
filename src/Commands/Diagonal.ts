@@ -1,4 +1,4 @@
-import { CompassDirection } from "../Common/CompassDirection";
+import { CompassDirection, directionIsNorthOrEast, directionIsNorthOrWest } from "../Common/CompassDirection";
 import { Position } from "../Common/Position";
 import { Command } from "./Command";
 import { CommandResult } from "./CommandResult";
@@ -42,27 +42,11 @@ export class DiagonalCommand implements Command {
   };
 
   private getAmountToChannge = (directionFacing: CompassDirection, moveUnits: number) => {
-    switch (directionFacing) {
-      case CompassDirection.NORTH:
-        return {
-          x: 1 * moveUnits,
-          y: 1 * moveUnits,
-        };
-      case CompassDirection.SOUTH:
-        return {
-          x: -1 * moveUnits,
-          y: -1 * moveUnits,
-        };
-      case CompassDirection.EAST:
-        return {
-          x: 1 * moveUnits,
-          y: -1 * moveUnits,
-        };
-      case CompassDirection.WEST:
-        return {
-          x: -1 * moveUnits,
-          y: 1 * moveUnits,
-        };
-    }
+    const xAmountToChange = directionIsNorthOrEast(directionFacing) ? 1 : -1;
+    const yAmountToChange = directionIsNorthOrWest(directionFacing) ? 1 : -1;
+    return {
+      x: xAmountToChange * moveUnits,
+      y: yAmountToChange * moveUnits,
+    };
   };
 }

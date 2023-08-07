@@ -17,6 +17,8 @@ export const directionIsNorthOrSouth = (direction: CompassDirection) =>
   direction === CompassDirection.NORTH || direction === CompassDirection.SOUTH;
 export const directionIsNorthOrEast = (direction: CompassDirection) =>
   direction === CompassDirection.NORTH || direction === CompassDirection.EAST;
+export const directionIsNorthOrWest = (direction: CompassDirection) =>
+  direction === CompassDirection.NORTH || direction === CompassDirection.WEST;
 
 export const parseCompassDirection = (direction: string): CompassDirection => {
   if (isCompassDirection(direction)) return direction;
