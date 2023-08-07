@@ -18,6 +18,14 @@ export const COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3 = (args: string[]) => {
 
 export const COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3_RECEIVED_NONE = `Could not parse arguments to PLACE command. ${PLACE_THREE_ARGUMENTS_EXPECTED}`;
 
+// Commands - diagonal
+
+export const COULD_NOT_PARSE_PLACE_DIAGONAL_ARGUMENTS_EXPECTED_1 = (args: string[]) => {
+  return `${args.join(
+    ","
+  )} Could not parse arguments to DIAGONAL command. At most one numeric argument greater than zero is expected eg '5'`;
+};
+
 //  Coordinates
 
 export const COULD_NOT_PARSE_COORDINATES_NON_NUMERIC_SUFFIX =

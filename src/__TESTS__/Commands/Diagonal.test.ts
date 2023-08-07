@@ -38,6 +38,38 @@ describe("Execute", () => {
       expect(result).toEqual(expect.objectContaining({ coordinates: expectedCoordinates.coordinates }));
     }
   );
+
+  const multipleMoveUnitCases = [
+    {
+      currentPosition: { coordinates, directionFacing: CompassDirection.NORTH },
+      moveUnits: "2",
+      expectedCoordinates: { coordinates: { x: 5, y: 7 } },
+    },
+    {
+      currentPosition: { coordinates, directionFacing: CompassDirection.EAST },
+      moveUnits: "2",
+      expectedCoordinates: { coordinates: { x: 5, y: 3 } },
+    },
+    {
+      currentPosition: { coordinates, directionFacing: CompassDirection.SOUTH },
+      moveUnits: "2",
+      expectedCoordinates: { coordinates: { x: 1, y: 3 } },
+    },
+    {
+      currentPosition: { coordinates, directionFacing: CompassDirection.WEST },
+      moveUnits: "2",
+      expectedCoordinates: { coordinates: { x: 1, y: 7 } },
+    },
+  ];
+
+  test.each(multipleMoveUnitCases)(
+    "Should return a Position with coordinates moved $moveUnits unit/s in direction $currentPosition.directionFacing and $moveUnits unit/s right of $currentPosition.directionFacing ",
+    ({ currentPosition, moveUnits, expectedCoordinates }) => {
+      const diagonalCommand = new DiagonalCommand([moveUnits]);
+      const result = diagonalCommand.execute(currentPosition);
+      expect(result).toEqual(expect.objectContaining({ coordinates: expectedCoordinates.coordinates }));
+    }
+  );
 });
 
 describe("Properties", () => {
@@ -48,10 +80,38 @@ describe("Properties", () => {
 });
 
 describe("Constructor", () => {
-  it("Should throw specific error message when constructed with arguments", () => {
-    const constructor = () => new DiagonalCommand(["ARG"]);
-    expect(constructor).toThrow(
-      "ARG could not be parsed as arguments to DIAGONAL command. No arguments should be supplied."
-    );
+  it("Should not throw error message when constructed with no arguments", () => {
+    const constructor = () => new DiagonalCommand([]);
+    expect(constructor).not.toThrow();
   });
+
+  it("Should not throw error message when constructed with one argument", () => {
+    const constructor = () => new DiagonalCommand(["2"]);
+    expect(constructor).not.toThrow();
+  });
+
+  const invalidCases = [
+    {
+      args: ["foo"],
+    },
+    {
+      args: ["0"],
+    },
+    {
+      args: ["-1"],
+    },
+    {
+      args: ["1", "2"],
+    },
+  ];
+
+  test.each(invalidCases)(
+    "Should throw specific error message when constructed with $args.length argument/s",
+    ({ args }) => {
+      const constructor = () => new DiagonalCommand(args);
+      expect(constructor).toThrow(
+        "Could not parse arguments to DIAGONAL command. At most one numeric argument greater than zero is expected eg '5'"
+      );
+    }
+  );
 });
