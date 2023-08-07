@@ -25,6 +25,7 @@ describe("E2E success cases from fixtures", () => {
     { fileName: "instructions_example1.txt", expected: "0,1,NORTH" },
     { fileName: "instructions_example2.txt", expected: "0,0,WEST" },
     { fileName: "instructions_example3.txt", expected: "3,3,NORTH" },
+    { fileName: "instructions_example4.txt", expected: "4,4,NORTH" },
   ];
   test.each(validTestCases)(
     "Should run test cases specified in INSTRUCTIONS.md ($fileName.txt) with result $expected",

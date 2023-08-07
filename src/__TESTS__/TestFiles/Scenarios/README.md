@@ -59,6 +59,20 @@ report
 Expected output: 3,3,NORTH
 ```
 
+### Example 4
+
+```plain
+PLACE 1,2,EAST
+MOVE
+MOVE
+LEFT
+MOVE
+DIAGONAL
+REPORT
+Expected output: 4,4,NORTH
+```
+
+
 ## Explore table boundaries
 
 - `explore_table_boundaries.txt`
