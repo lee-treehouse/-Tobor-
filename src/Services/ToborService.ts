@@ -22,7 +22,7 @@ export class ToborService {
     const commandInput = separateCommandAndArguments(line, this.config.input.format.capitaliseCommandsAndArgs);
 
     try {
-      const command: Command = getCommand(commandInput);
+      const command: Command = getCommand(commandInput, this.table.getMaxCoordinates());
       if (this.robotPosition === "OFF" && command.canBeIgnored) return Promise.resolve();
       const commandResult = command.execute(this.robotPosition !== "OFF" ? this.robotPosition : defaultPosition);
       this.processCommandResult(commandResult);

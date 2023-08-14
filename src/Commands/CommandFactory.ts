@@ -9,8 +9,9 @@ import { PlaceCommand } from "./Place";
 import { ReportCommand } from "./Report";
 import { ExitCommand } from "./Exit";
 import { CommandParserError } from "./CommandParserError";
+import { Coordinates } from "../Common/Coordinates";
 
-export const getCommand = (input: CommandInput): Command => {
+export const getCommand = (input: CommandInput, maxCoordinates: Coordinates): Command => {
   const { command, args } = input;
 
   switch (command) {
