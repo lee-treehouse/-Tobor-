@@ -18,6 +18,17 @@ export const COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3 = (args: string[]) => {
 
 export const COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3_RECEIVED_NONE = `Could not parse arguments to PLACE command. ${PLACE_THREE_ARGUMENTS_EXPECTED}`;
 
+// Commands - PlaceMax
+
+const PLACEMAX_ONE_ARGUMENT_EXPECTED = `One argument is expected (Direction) eg 'NORTH'.`;
+
+export const COULD_NOT_PARSE_PLACEMAX_ARGUMENTS_EXPECTED_1 = (args: string[]) => {
+  if (args.length === 0) return COULD_NOT_PARSE_PLACEMAX_ARGUMENTS_EXPECTED_1_RECEIVED_NONE;
+  return `${args.join(",")} could not be parsed as arguments to PLACEMAX command. ${PLACEMAX_ONE_ARGUMENT_EXPECTED}`;
+};
+
+export const COULD_NOT_PARSE_PLACEMAX_ARGUMENTS_EXPECTED_1_RECEIVED_NONE = `Could not parse arguments to PLACEMAX command. ${PLACEMAX_ONE_ARGUMENT_EXPECTED}`;
+
 //  Coordinates
 
 export const COULD_NOT_PARSE_COORDINATES_NON_NUMERIC_SUFFIX =

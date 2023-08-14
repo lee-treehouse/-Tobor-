@@ -10,6 +10,7 @@ import { ReportCommand } from "./Report";
 import { ExitCommand } from "./Exit";
 import { CommandParserError } from "./CommandParserError";
 import { Coordinates } from "../Common/Coordinates";
+import { PlaceMaxCommand } from "./PlaceMax";
 
 export const getCommand = (input: CommandInput, maxCoordinates: Coordinates): Command => {
   const { command, args } = input;
@@ -21,6 +22,8 @@ export const getCommand = (input: CommandInput, maxCoordinates: Coordinates): Co
       return new ExitCommand(args);
     case PlaceCommand.command:
       return new PlaceCommand(args);
+    case PlaceMaxCommand.command:
+      return new PlaceMaxCommand(args, maxCoordinates);
     case ReportCommand.command:
       return new ReportCommand(args);
     case DirectionChange.LEFT:

@@ -3,6 +3,7 @@ import { getCommand } from "../../Commands/CommandFactory";
 import { ExitCommand } from "../../Commands/Exit";
 import { MoveCommand } from "../../Commands/Move";
 import { PlaceCommand } from "../../Commands/Place";
+import { PlaceMaxCommand } from "../../Commands/PlaceMax";
 import { ReportCommand } from "../../Commands/Report";
 import { Table } from "../../Common/Table";
 import { FORMATTED_COMMAND_LIST } from "../../UX/messages";
@@ -15,6 +16,7 @@ describe("Command Factory", () => {
     { input: { command: "LEFT", args: [] }, classType: ChangeDirectionCommand },
     { input: { command: "MOVE", args: [] }, classType: MoveCommand },
     { input: { command: "PLACE", args: ["1", "2", "NORTH"] }, classType: PlaceCommand },
+    { input: { command: "PLACEMAX", args: ["NORTH"] }, classType: PlaceMaxCommand },
     { input: { command: "REPORT", args: [] }, classType: ReportCommand },
     { input: { command: "RIGHT", args: [] }, classType: ChangeDirectionCommand },
     { input: { command: "EXIT", args: [] }, classType: ExitCommand },
