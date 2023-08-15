@@ -31,7 +31,7 @@ Visualising tricky coordinates
 
 [ ] [X] [ ] [X] [ ]
 [ ] [X] [ ] [X] [ ]
-[ ] [X] [X] [X] [ ]
+[ ] [X] [X] [X] [d]
 [ ] [ ] [X] [ ] [ ]
 [ ] [ ] [ ] [ ] [ ]
 
@@ -40,10 +40,11 @@ Visualising tricky coordinates
 [0,2] [1,2] [2,2] [3,2] [4,2]
 [0,1] [1,1] [2,1] [3,1] [4,1]
 [0,0] [1,0] [2,0] [3,0] [4,0]
+
 */
 
 describe("Execute", () => {
-  it.only("Should identify impossible journey", () => {
+  it("Should identify impossible journey", () => {
     const EXAMPLE_IMPOSSIBLE_JOURNEY = {
       start: { x: 2, y: 4 },
       end: ["4", "4"],
@@ -65,7 +66,7 @@ describe("Execute", () => {
     expect(iWantToGoToThereCommand.execute(startingPosition)).toEqual(expected);
   });
 
-  it("Should return a list of all coordinates travelled by breadth first search before reaching destination, including source and destination coordinates", () => {
+  it("Should return a list of all coordinates travelled by breadth first search before reaching destination, including source and destination coordinates, excluding dead ends", () => {
     const startingPosition: Position = { coordinates: { x: 0, y: 3 }, directionFacing: CompassDirection.NORTH };
     const desiredPositionArgs = ["4", "2"];
 
@@ -75,24 +76,54 @@ describe("Execute", () => {
       EXAMPLE_TRICKY_OBSTACLE_CPPRDONATES
     );
 
-    const expected = `0,3
-0,4
-0,2
-0,1
-0,0
-1,1
-1,0
-2,0
-3,0
-3,1
-4,0
-4,1
-4,2`;
+    const expected = [
+      [0, 3],
+      [0, 2],
+      [0, 1],
+      [0, 0],
+      [1, 1],
+      [1, 0],
+      [2, 0],
+      [3, 0],
+      [3, 1],
+      [4, 0],
+      [4, 1],
+      [4, 2],
+    ];
 
-    //    expect(iWantToGoToThereCommand.execute(startingPosition)).toEqual(`${expected}\n\n${expectedCommands}`);
-    expect(iWantToGoToThereCommand.getAllCoordinatesTravelledToVisitDestination(startingPosition)).toEqual(
-      `${expected}`
+    expect(iWantToGoToThereCommand.getAllCoordinatesTravelledToVisitDestination(startingPosition)).toEqual(expected);
+  });
+
+  it.only("Should return route including backtracking", () => {
+    const startingPosition: Position = { coordinates: { x: 0, y: 3 }, directionFacing: CompassDirection.NORTH };
+    const desiredPositionArgs = ["4", "2"];
+
+    const iWantToGoToThereCommand = new IWantToGoToThereCommand(
+      desiredPositionArgs,
+      DEFAULT_MAX_COORDINATES,
+      EXAMPLE_TRICKY_OBSTACLE_CPPRDONATES
     );
+
+    const expectedRouteWithBackTracking = [
+      [0, 3],
+      [0, 2],
+      [0, 1],
+      [0, 0],
+      [0, 1],
+      [1, 1],
+      [1, 0],
+      [2, 0],
+      [3, 0],
+      [3, 1],
+      [3, 0],
+      [4, 0],
+      [4, 1],
+      [4, 2],
+    ];
+
+    const expected = expectedRouteWithBackTracking.join("\n");
+
+    expect(iWantToGoToThereCommand.execute(startingPosition)).toEqual(expected);
   });
 });
 

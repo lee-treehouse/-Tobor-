@@ -30,8 +30,12 @@ export class IWantToGoToThereCommand implements Command {
 
   public execute(currentPosition: Position): CommandResult {
     try {
-      const getAllCoordinatesTravelledToVisitDestination =
-        this.getAllCoordinatesTravelledToVisitDestination(currentPosition);
+      const allCoordinates = this.getAllCoordinatesTravelledToVisitDestination(currentPosition);
+      if (allCoordinates && allCoordinates.length > 0) {
+        const getRouteIncludingBacktracking = this.getRouteFromAllCoordinates(allCoordinates);
+        return getRouteIncludingBacktracking?.join("\n");
+      }
+      return "No Route Found";
     } catch (error) {
       let message = "Unknown Error";
       if (error instanceof Error) message = error.message;
@@ -39,7 +43,93 @@ export class IWantToGoToThereCommand implements Command {
     }
   }
 
-  public getAllCoordinatesTravelledToVisitDestination(currentPosition: Position): CommandResult {
+  private getRouteFromAllCoordinates = (coordinates: number[][]) => {
+    /*
+// are all of these moves one at a time? No 
+0,3
+0,2
+0,1
+0,0
+1,1 // processing forwards, here is the first move that is problematic //
+1,0
+2,0
+3,0
+3,1  
+4,0
+4,1
+4,2
+
+// so what would route including backtrackign look like at this stage 
+0,3
+0,2
+0,1
+0,0
+0,1 // went back as couldn't get to 1,1
+1,1 
+1,0
+2,0
+3,0
+3,1
+3,0 // went back as couldn't get to 3,1
+4,0  
+4,1
+4,2
+*/
+    const routeIncludingBacktracking: number[][] = [];
+    if (coordinates.length > 0) {
+      routeIncludingBacktracking.push(coordinates[0]);
+    }
+
+    for (let i = 0; i < coordinates.length - 1; i++) {
+      const currentCoordinate = routeIncludingBacktracking[routeIncludingBacktracking.length - 1];
+      const nextCoordinate = coordinates[i + 1];
+
+      //routeIncludingBacktracking.push(currentCoordinate);
+
+      const areCoordinatesAdjacent = this.areCoordinatesAdjacent(currentCoordinate, nextCoordinate);
+
+      if (areCoordinatesAdjacent) {
+        routeIncludingBacktracking.push(nextCoordinate);
+      } else {
+        let howFarToGoBack = 0;
+        for (let j = i - 1; j >= 0; j--) {
+          console.log("i is " + i);
+          console.log("I am in the for loop and j is " + j);
+
+          const candidateCoordinate = coordinates[j];
+          routeIncludingBacktracking.push(candidateCoordinate);
+          if (this.areCoordinatesAdjacent(candidateCoordinate, nextCoordinate)) {
+            // I couldn't get from 0,0 to 1,1 so I went back the prior coord
+            // which is 0,1
+            // I can get from 0,1 to 1,1 so I want to go back 1.. but in another scenario maybe I woudl have had to go back 2 eg
+            // when i found the problem i was 3
+            // in this case j is going to be 2
+            howFarToGoBack = i - j;
+            //console.log("going back " + howFarToGoBack);
+            break;
+            // we need to go back until we can find a previous coordinate that can get us to our next coordinate. we should
+            // not put the current coordinate in our route
+          }
+        }
+        // once this loop is complete, you have definitely backtracked to where you can get to the next coordinate so lets add it
+        routeIncludingBacktracking.push(nextCoordinate);
+      }
+    }
+
+    console.log(routeIncludingBacktracking);
+
+    return routeIncludingBacktracking;
+  };
+
+  private areCoordinatesAdjacent = (coordinate1: number[], coordinate2: number[]) => {
+    const xDiff = Math.abs(coordinate1[0] - coordinate2[0]);
+    const yDiff = Math.abs(coordinate1[1] - coordinate2[1]);
+    if (xDiff === 0 && yDiff === 1) return true;
+    if (yDiff === 0 && xDiff === 1) return true;
+    return false;
+  };
+
+  public getAllCoordinatesTravelledToVisitDestination(currentPosition: Position) {
     const coordinatesTravelled = this.breadthFirstSearch(
       [currentPosition.coordinates.x, currentPosition.coordinates.y],
       [this.desiredCoordinates.x, this.desiredCoordinates.y]
@@ -53,9 +143,11 @@ export class IWantToGoToThereCommand implements Command {
       throw new Error("PATH NOT FOUND!");
     }
 
-    const result = coordinatesTravelled.join("\n");
+    return coordinatesTravelled;
+
+    //const result = coordinatesTravelled.join("\n");
     // console.log(result);
-    return result;
+    //return result;
 
     // const commandsToAchieveResult: string[] = [];
     // for (let i = 0; i < coordinatesTravelled.length - 1; i++) {
@@ -87,6 +179,7 @@ export class IWantToGoToThereCommand implements Command {
   private breadthFirstSearch = (initialCoordinate: number[], desiredCoordinate: number[]) => {
     const queue: number[][] = [initialCoordinate];
     const visitedCoordinates: number[][] = [];
+    const actualPath: number[][] = [];
     const result = [];
 
     while (queue.length) {
@@ -98,10 +191,11 @@ export class IWantToGoToThereCommand implements Command {
           result.push(coordinate);
 
           // exit early if destination is found
-          if (this.coordinateArraysAreEqual(coordinate, desiredCoordinate)) return result;
-
+          if (this.coordinateArraysAreEqual(coordinate, desiredCoordinate)) {
+            actualPath.push(coordinate);
+            return actualPath;
+          }
           const neighbours = this.getNeighbours(coordinate);
-
           // if you have visited a neighbour, there is no reason to requeue it
           // if you have visited all the neighbours, this is a dead end
           const alreadyVisitedNeighbours: number[][] = [];
@@ -113,14 +207,14 @@ export class IWantToGoToThereCommand implements Command {
             }
           }
 
-          if (alreadyVisitedNeighbours.length === neighbours.length) {
-            console.log("dead end found ");
-            console.log(coordinate);
+          // make sure it's not a dead end before adding it to the actual path
+          if (!(alreadyVisitedNeighbours.length === neighbours.length)) {
+            actualPath.push(coordinate);
           }
         }
       }
     }
-    return result;
+    return actualPath;
   };
 
   private getNeighbours(coordinates: number[]) {
