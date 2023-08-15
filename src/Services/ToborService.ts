@@ -52,7 +52,7 @@ export class ToborService {
   };
 
   private processNewPosition = (newPosition: Position) => {
-    const positionHasObstaclesInTheWay = this.table.canHazObstacles(newPosition.coordinates);
+    const positionHasObstaclesInTheWay = this.table.doCoordinatesHaveObstacles(newPosition.coordinates);
     const positionIsOutOfBounds = this.table.areCoordinatesOutOfBounds(newPosition.coordinates);
 
     if (!(positionHasObstaclesInTheWay || positionIsOutOfBounds)) {

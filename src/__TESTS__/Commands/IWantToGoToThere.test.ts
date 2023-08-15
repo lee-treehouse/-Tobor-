@@ -9,14 +9,35 @@ const DEFAULT_OBSTACLES_COORDINATES = [
 ];
 
 describe("Execute", () => {
-  it("Should return the requested position", () => {
+  it("Should return a list of coordinates to pass through retrieved through breadth first search", () => {
+    const startingPosition: Position = { coordinates: { x: 1, y: 1 }, directionFacing: CompassDirection.NORTH };
+    const desiredPositionArgs = ["3", "3"];
+
     const iWantToGoToThereCommand = new IWantToGoToThereCommand(
-      ["1", "2"],
+      desiredPositionArgs,
       DEFAULT_MAX_COORDINATES,
       DEFAULT_OBSTACLES_COORDINATES
     );
-    const expectedResult: Position = { coordinates: { x: 1, y: 2 }, directionFacing: CompassDirection.NORTH };
-    expect(iWantToGoToThereCommand.execute()).toEqual(expectedResult);
+
+    const expected = `1,1
+1,2
+1,0
+0,1
+1,3
+2,2
+0,2
+2,0
+0,0
+1,4
+2,3
+0,3
+3,2
+3,0
+2,4
+0,4
+3,3`;
+
+    expect(iWantToGoToThereCommand.execute(startingPosition)).toEqual(expected);
   });
 });
 
