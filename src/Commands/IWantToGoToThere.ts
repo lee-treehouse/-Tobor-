@@ -1,3 +1,4 @@
+import { CompassDirection } from "../Common/CompassDirection";
 import {
   Coordinates,
   areCoordinatesOutOfBounds,
@@ -33,7 +34,24 @@ export class IWantToGoToThereCommand implements Command {
       [this.desiredCoordinates.x, this.desiredCoordinates.y]
     );
     const result = coordinatesTravelled.join("\n");
-    return result;
+
+    const commandsToAchieveResult: string[] = [];
+    for (let i = 0; i < coordinatesTravelled.length - 1; i++) {
+      const currentCoordinates = coordinatesTravelled[i];
+      const nextCoordinate = coordinatesTravelled[i + 1];
+      const commands = this.getCommandsToMoveFromOneCoordinateToAnother(
+        currentPosition.directionFacing,
+        currentCoordinates,
+        nextCoordinate
+      );
+      commands.forEach((command) => commandsToAchieveResult.push(command));
+    }
+
+    const commandsResult = commandsToAchieveResult.join("\n");
+
+    const finalResult = `${result}\n\n${commandsResult}`;
+    console.log(finalResult);
+    return finalResult;
   }
 
   private coordinateArraysAreEqual = (array1: number[], array2: number[]) =>
@@ -87,6 +105,74 @@ export class IWantToGoToThereCommand implements Command {
     });
 
     return neighbours;
+  }
+
+  private getCommandsToMoveFromOneCoordinateToAnother = (
+    curentDirectionFacing: CompassDirection,
+    initialCoordinate: number[],
+    destinationCoordinate: number[]
+  ) => {
+    const commands: string[] = [];
+
+    const axisToChange = destinationCoordinate[0] === initialCoordinate[0] ? "X" : "Y";
+    const amountToChange =
+      axisToChange === "X"
+        ? destinationCoordinate[0] - initialCoordinate[0]
+        : destinationCoordinate[1] - initialCoordinate[1];
+    let directionChangeCommands: string[] = [];
+
+    if (axisToChange === "Y") {
+      if (amountToChange === 1) {
+        directionChangeCommands = this.getCommandsToFaceDirection(curentDirectionFacing, CompassDirection.NORTH);
+      } else {
+        directionChangeCommands = this.getCommandsToFaceDirection(curentDirectionFacing, CompassDirection.SOUTH);
+      }
+    }
+
+    if (axisToChange === "X") {
+      if (amountToChange === 1) {
+        directionChangeCommands = this.getCommandsToFaceDirection(curentDirectionFacing, CompassDirection.EAST);
+      } else {
+        directionChangeCommands = this.getCommandsToFaceDirection(curentDirectionFacing, CompassDirection.WEST);
+      }
+    }
+
+    directionChangeCommands.forEach((directionChangeCommand) => {
+      commands.push(directionChangeCommand);
+    });
+    commands.push("MOVE");
+    return commands;
+  };
+
+  private getCommandsToFaceDirection(currentDirection: CompassDirection, targetDirection: CompassDirection): string[] {
+    if (currentDirection === targetDirection) return [];
+
+    // TODO simplify this logic
+    if (currentDirection === CompassDirection.NORTH) {
+      if (targetDirection === CompassDirection.SOUTH) return ["RIGHT", "RIGHT"];
+      if (targetDirection === CompassDirection.EAST) return ["RIGHT"];
+      if (targetDirection === CompassDirection.WEST) return ["LEFT"];
+    }
+
+    if (currentDirection === CompassDirection.SOUTH) {
+      if (targetDirection === CompassDirection.NORTH) return ["RIGHT", "RIGHT"];
+      if (targetDirection === CompassDirection.EAST) return ["LEFT"];
+      if (targetDirection === CompassDirection.WEST) return ["RIGHT"];
+    }
+
+    if (currentDirection === CompassDirection.EAST) {
+      if (targetDirection === CompassDirection.SOUTH) return ["RIGHT"];
+      if (targetDirection === CompassDirection.NORTH) return ["LEFT"];
+      if (targetDirection === CompassDirection.WEST) return ["RIGHT, RIGHT"];
+    }
+
+    if (currentDirection === CompassDirection.WEST) {
+      if (targetDirection === CompassDirection.NORTH) return ["RIGHT"];
+      if (targetDirection === CompassDirection.EAST) return ["RIGHT, RIGHT"];
+      if (targetDirection === CompassDirection.SOUTH) return ["LEFT"];
+    }
+
+    return [];
   }
 
   private areArrayCoordinatesBlockedByObstacle = (coordinates: number[]): boolean => {

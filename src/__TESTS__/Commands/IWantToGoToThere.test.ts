@@ -37,7 +37,51 @@ describe("Execute", () => {
 0,4
 3,3`;
 
-    expect(iWantToGoToThereCommand.execute(startingPosition)).toEqual(expected);
+    const expectedCommands = `LEFT
+MOVE
+LEFT
+MOVE
+MOVE
+RIGHT
+RIGHT
+MOVE
+RIGHT
+RIGHT
+MOVE
+RIGHT
+RIGHT
+MOVE
+RIGHT
+RIGHT
+MOVE
+RIGHT
+RIGHT
+MOVE
+RIGHT
+RIGHT
+MOVE
+RIGHT
+RIGHT
+MOVE
+RIGHT
+RIGHT
+MOVE
+RIGHT
+RIGHT
+MOVE
+LEFT
+MOVE
+RIGHT
+RIGHT
+MOVE
+RIGHT
+RIGHT
+MOVE
+RIGHT
+RIGHT
+MOVE`;
+
+    expect(iWantToGoToThereCommand.execute(startingPosition)).toEqual(`${expected}\n\n${expectedCommands}`);
   });
 });
 
