@@ -9,8 +9,14 @@ import { PlaceCommand } from "./Place";
 import { ReportCommand } from "./Report";
 import { ExitCommand } from "./Exit";
 import { CommandParserError } from "./CommandParserError";
+import { IWantToGoToThereCommand } from "./IWantToGoToThere";
+import { Coordinates } from "../Common/Coordinates";
 
-export const getCommand = (input: CommandInput): Command => {
+export const getCommand = (
+  input: CommandInput,
+  maxCoordinates: Coordinates,
+  obstacleCoordinates: Coordinates[]
+): Command => {
   const { command, args } = input;
 
   switch (command) {
@@ -18,6 +24,8 @@ export const getCommand = (input: CommandInput): Command => {
       return new MoveCommand(args);
     case ExitCommand.command:
       return new ExitCommand(args);
+    case IWantToGoToThereCommand.command:
+      return new IWantToGoToThereCommand(args, maxCoordinates, obstacleCoordinates);
     case PlaceCommand.command:
       return new PlaceCommand(args);
     case ReportCommand.command:

@@ -93,6 +93,10 @@ describe("Config derived from process.env", () => {
           width: 5,
           length: 5,
         },
+        obstacles: [
+          { x: 2, y: 1 },
+          { x: 3, y: 4 },
+        ],
       },
     });
   });

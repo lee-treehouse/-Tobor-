@@ -22,7 +22,11 @@ export class ToborService {
     const commandInput = separateCommandAndArguments(line, this.config.input.format.capitaliseCommandsAndArgs);
 
     try {
-      const command: Command = getCommand(commandInput);
+      const command: Command = getCommand(
+        commandInput,
+        this.table.getMaxCoordinates(),
+        this.table.getObstaclesCoordinates()
+      );
       if (this.robotPosition === "OFF" && command.canBeIgnored) return Promise.resolve();
       const commandResult = command.execute(this.robotPosition !== "OFF" ? this.robotPosition : defaultPosition);
       this.processCommandResult(commandResult);
@@ -48,7 +52,12 @@ export class ToborService {
   };
 
   private processNewPosition = (newPosition: Position) => {
-    if (!this.table.areCoordinatesOutOfBounds(newPosition.coordinates)) this.robotPosition = newPosition;
+    const positionHasObstaclesInTheWay = this.table.canHazObstacles(newPosition.coordinates);
+    const positionIsOutOfBounds = this.table.areCoordinatesOutOfBounds(newPosition.coordinates);
+
+    if (!(positionHasObstaclesInTheWay || positionIsOutOfBounds)) {
+      this.robotPosition = newPosition;
+    }
   };
 
   public readInput = async () => {
