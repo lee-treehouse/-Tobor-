@@ -29,6 +29,17 @@ export class IWantToGoToThereCommand implements Command {
   }
 
   public execute(currentPosition: Position): CommandResult {
+    try {
+      const getAllCoordinatesTravelledToVisitDestination =
+        this.getAllCoordinatesTravelledToVisitDestination(currentPosition);
+    } catch (error) {
+      let message = "Unknown Error";
+      if (error instanceof Error) message = error.message;
+      return message;
+    }
+  }
+
+  public getAllCoordinatesTravelledToVisitDestination(currentPosition: Position): CommandResult {
     const coordinatesTravelled = this.breadthFirstSearch(
       [currentPosition.coordinates.x, currentPosition.coordinates.y],
       [this.desiredCoordinates.x, this.desiredCoordinates.y]
@@ -37,12 +48,13 @@ export class IWantToGoToThereCommand implements Command {
     const matchingVisitedCoordinates = coordinatesTravelled.filter((visitedCoordinate) =>
       this.coordinateArraysAreEqual(visitedCoordinate, [this.desiredCoordinates.x, this.desiredCoordinates.y])
     );
+
     if (!matchingVisitedCoordinates || matchingVisitedCoordinates.length === 0) {
-      return "PATH NOT FOUND!";
+      throw new Error("PATH NOT FOUND!");
     }
 
     const result = coordinatesTravelled.join("\n");
-    console.log(result);
+    // console.log(result);
     return result;
 
     // const commandsToAchieveResult: string[] = [];
@@ -64,6 +76,11 @@ export class IWantToGoToThereCommand implements Command {
     // return finalResult;
   }
 
+  private coordinateIsContainedInVisited = (coordinate: number[], visited: number[][]) => {
+    const matchingCoordinates = visited.filter((visited) => this.coordinateArraysAreEqual(visited, coordinate));
+    return matchingCoordinates && matchingCoordinates.length > 0;
+  };
+
   private coordinateArraysAreEqual = (array1: number[], array2: number[]) =>
     array1[0] === array2[0] && array1[1] === array2[1];
 
@@ -76,20 +93,29 @@ export class IWantToGoToThereCommand implements Command {
       const coordinate = queue.shift();
 
       if (coordinate) {
-        const matchingVisitedCoordinates = visitedCoordinates.filter((visitedCoordinate) =>
-          this.coordinateArraysAreEqual(visitedCoordinate, coordinate)
-        );
-
-        if (!matchingVisitedCoordinates || matchingVisitedCoordinates.length === 0) {
+        if (!this.coordinateIsContainedInVisited(coordinate, visitedCoordinates)) {
           visitedCoordinates.push(coordinate);
           result.push(coordinate);
 
+          // exit early if destination is found
           if (this.coordinateArraysAreEqual(coordinate, desiredCoordinate)) return result;
 
           const neighbours = this.getNeighbours(coordinate);
 
+          // if you have visited a neighbour, there is no reason to requeue it
+          // if you have visited all the neighbours, this is a dead end
+          const alreadyVisitedNeighbours: number[][] = [];
           for (const neighbour of neighbours) {
-            queue.push(neighbour);
+            if (this.coordinateIsContainedInVisited(neighbour, visitedCoordinates)) {
+              alreadyVisitedNeighbours.push(neighbour);
+            } else {
+              queue.push(neighbour);
+            }
+          }
+
+          if (alreadyVisitedNeighbours.length === neighbours.length) {
+            console.log("dead end found ");
+            console.log(coordinate);
           }
         }
       }

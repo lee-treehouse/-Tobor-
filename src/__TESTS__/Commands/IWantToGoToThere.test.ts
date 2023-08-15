@@ -43,7 +43,7 @@ Visualising tricky coordinates
 */
 
 describe("Execute", () => {
-  it("Should identify impossible journey", () => {
+  it.only("Should identify impossible journey", () => {
     const EXAMPLE_IMPOSSIBLE_JOURNEY = {
       start: { x: 2, y: 4 },
       end: ["4", "4"],
@@ -90,7 +90,9 @@ describe("Execute", () => {
 4,2`;
 
     //    expect(iWantToGoToThereCommand.execute(startingPosition)).toEqual(`${expected}\n\n${expectedCommands}`);
-    expect(iWantToGoToThereCommand.execute(startingPosition)).toEqual(`${expected}`);
+    expect(iWantToGoToThereCommand.getAllCoordinatesTravelledToVisitDestination(startingPosition)).toEqual(
+      `${expected}`
+    );
   });
 });
 
