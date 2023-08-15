@@ -17,7 +17,7 @@ export const getDefaultTestConfig = (): AppConfig => {
         width: 5,
         length: 5,
       },
-      obstacles: [],
+      obstaclesCoordinates: [],
     },
   };
 };

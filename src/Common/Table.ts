@@ -58,7 +58,7 @@ export class Table {
   };
 
   canHazObstacles = (coordinates: Coordinates): boolean => {
-    const matchingObstacles = this.config.obstacles?.filter(
+    const matchingObstacles = this.config.obstaclesCoordinates?.filter(
       (obstacle) => coordinates.x === obstacle.x && coordinates.y === obstacle.y
     );
     return !!(matchingObstacles && matchingObstacles.length > 0);
@@ -85,6 +85,6 @@ export class Table {
   };
 
   getObstaclesCoordinates = (): Coordinates[] => {
-    return this.config.obstacles;
+    return this.config.obstaclesCoordinates;
   };
 }

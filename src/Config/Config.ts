@@ -1,4 +1,4 @@
-import { Obstacle } from "../Common/Obstacle";
+import { Coordinates } from "../Common/Coordinates";
 import {
   TABLE_LENGTH_AND_TABLE_WIDTH_BELOW_ONE_SUFFIX,
   TABLE_LENGTH_AND_TABLE_WIDTH_MUST_BE_NUMERIC_SUFFIX,
@@ -14,7 +14,7 @@ export interface TableConfig {
     width: number;
     length: number;
   };
-  obstacles: Obstacle[];
+  obstaclesCoordinates: Coordinates[];
 }
 
 export interface ToborConfig {
@@ -90,7 +90,7 @@ export const getDefaultConfig = (): AppConfig => {
         width: 5,
         length: 5,
       },
-      obstacles: [
+      obstaclesCoordinates: [
         { x: 2, y: 1 },
         { x: 3, y: 4 },
       ],
