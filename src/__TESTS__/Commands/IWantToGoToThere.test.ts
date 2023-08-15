@@ -9,7 +9,7 @@ const DEFAULT_OBSTACLES_COORDINATES = [
 ];
 
 describe("Execute", () => {
-  it("Should return a list of coordinates to pass through retrieved through breadth first search", () => {
+  it("Should return a list of coordinates to pass through retrieved through breadth first search, including source and destination coordinates", () => {
     const startingPosition: Position = { coordinates: { x: 1, y: 1 }, directionFacing: CompassDirection.NORTH };
     const desiredPositionArgs = ["3", "3"];
 

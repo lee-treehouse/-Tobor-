@@ -1,8 +1,5 @@
 import { getDefaultConfig } from "../../Config/Config";
 import { Table } from "../../Common/Table";
-// import { Position } from "../../Common/Position";
-// import { CompassDirection } from "../../Common/CompassDirection";
-// import { Coordinates } from "../../Common/Coordinates";
 
 const config = getDefaultConfig();
 let table: Table;
