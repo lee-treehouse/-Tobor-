@@ -33,25 +33,35 @@ export class IWantToGoToThereCommand implements Command {
       [currentPosition.coordinates.x, currentPosition.coordinates.y],
       [this.desiredCoordinates.x, this.desiredCoordinates.y]
     );
-    const result = coordinatesTravelled.join("\n");
 
-    const commandsToAchieveResult: string[] = [];
-    for (let i = 0; i < coordinatesTravelled.length - 1; i++) {
-      const currentCoordinates = coordinatesTravelled[i];
-      const nextCoordinate = coordinatesTravelled[i + 1];
-      const commands = this.getCommandsToMoveFromOneCoordinateToAnother(
-        currentPosition.directionFacing,
-        currentCoordinates,
-        nextCoordinate
-      );
-      commands.forEach((command) => commandsToAchieveResult.push(command));
+    const matchingVisitedCoordinates = coordinatesTravelled.filter((visitedCoordinate) =>
+      this.coordinateArraysAreEqual(visitedCoordinate, [this.desiredCoordinates.x, this.desiredCoordinates.y])
+    );
+    if (!matchingVisitedCoordinates || matchingVisitedCoordinates.length === 0) {
+      return "PATH NOT FOUND!";
     }
 
-    const commandsResult = commandsToAchieveResult.join("\n");
+    const result = coordinatesTravelled.join("\n");
+    console.log(result);
+    return result;
 
-    const finalResult = `${result}\n\n${commandsResult}`;
-    console.log(finalResult);
-    return finalResult;
+    // const commandsToAchieveResult: string[] = [];
+    // for (let i = 0; i < coordinatesTravelled.length - 1; i++) {
+    //   const currentCoordinates = coordinatesTravelled[i];
+    //   const nextCoordinate = coordinatesTravelled[i + 1];
+    //   const commands = this.getCommandsToMoveFromOneCoordinateToAnother(
+    //     currentPosition.directionFacing,
+    //     currentCoordinates,
+    //     nextCoordinate
+    //   );
+    //   commands.forEach((command) => commandsToAchieveResult.push(command));
+    // }
+
+    // const commandsResult = commandsToAchieveResult.join("\n");
+
+    // const finalResult = `${result}\n\n${commandsResult}`;
+    // console.log(finalResult);
+    // return finalResult;
   }
 
   private coordinateArraysAreEqual = (array1: number[], array2: number[]) =>
