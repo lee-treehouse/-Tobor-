@@ -18,6 +18,19 @@ export const COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3 = (args: string[]) => {
 
 export const COULD_NOT_PARSE_PLACE_ARGUMENTS_EXPECTED_3_RECEIVED_NONE = `Could not parse arguments to PLACE command. ${PLACE_THREE_ARGUMENTS_EXPECTED}`;
 
+// Commands - I want to go to there
+
+const IWANTTOGOTOTHERE_TWO_ARGUMENTS_EXPECTED = `Two arguments are expected (X coordinate, Y coordinate) eg '1,2'.`;
+
+export const COULD_NOT_PARSE_IWANTTOGOTOTHERE_ARGUMENTS_EXPECTED_2 = (args: string[]) => {
+  if (args.length === 0) return COULD_NOT_PARSE_IWANTTOGOTOTHERE_ARGUMENTS_EXPECTED_2_RECEIVED_NONE;
+  return `${args.join(
+    ","
+  )} could not be parsed as arguments to IWANTTOGOTOTHERE command. ${IWANTTOGOTOTHERE_TWO_ARGUMENTS_EXPECTED}`;
+};
+
+export const COULD_NOT_PARSE_IWANTTOGOTOTHERE_ARGUMENTS_EXPECTED_2_RECEIVED_NONE = `Could not parse arguments to IWANTTOGOTOTHERE command. ${IWANTTOGOTOTHERE_TWO_ARGUMENTS_EXPECTED}`;
+
 //  Coordinates
 
 export const COULD_NOT_PARSE_COORDINATES_NON_NUMERIC_SUFFIX =

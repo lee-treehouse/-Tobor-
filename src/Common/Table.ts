@@ -1,13 +1,24 @@
 import { TableConfig } from "../Config/Config";
-import { Coordinates } from "./Coordinates";
+
+import { Coordinates, areCoordinatesOutOfBounds, doCoordinatesHaveObstacles } from "./Coordinates";
 
 export class Table {
   public constructor(private readonly config: TableConfig) {}
 
-  areCoordinatesOutOfBounds = (coordinates: Coordinates) => {
-    if (coordinates.x < 0 || coordinates.y < 0) return true;
-    if (coordinates.x > this.config.size.width - 1) return true;
-    if (coordinates.y > this.config.size.length - 1) return true;
-    return false;
+  doCoordinatesHaveObstacles = (coordinates: Coordinates): boolean =>
+    doCoordinatesHaveObstacles(coordinates, this.config.obstaclesCoordinates);
+
+  areCoordinatesOutOfBounds = (coordinates: Coordinates) =>
+    areCoordinatesOutOfBounds(coordinates, this.getMaxCoordinates());
+
+  getMaxCoordinates = (): Coordinates => {
+    return {
+      x: this.config.size.width - 1,
+      y: this.config.size.length - 1,
+    };
+  };
+
+  getObstaclesCoordinates = (): Coordinates[] => {
+    return this.config.obstaclesCoordinates;
   };
 }

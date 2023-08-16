@@ -4,6 +4,24 @@ import { Table } from "../../Common/Table";
 const config = getDefaultConfig();
 let table: Table;
 
+describe("Are coordinates at the location of an obstacle", () => {
+  beforeEach(() => {
+    table = new Table(config.table);
+  });
+
+  const obstacleFoundCases = [{ coordinates: { x: 2, y: 1 } }, { coordinates: { x: 3, y: 4 } }];
+
+  test.each(obstacleFoundCases)("should find obstacles at $coordinates", ({ coordinates }) => {
+    expect(table.doCoordinatesHaveObstacles(coordinates)).toBe(true);
+  });
+
+  const obstacleNotFoundCases = [{ coordinates: { x: 3, y: 2 } }, { coordinates: { x: 3, y: 3 } }];
+
+  test.each(obstacleNotFoundCases)("should not find obstacles at $coordinates", ({ coordinates }) => {
+    expect(table.doCoordinatesHaveObstacles(coordinates)).toBe(false);
+  });
+});
+
 describe("Are coordinates out of bounds", () => {
   beforeEach(() => {
     table = new Table(config.table);

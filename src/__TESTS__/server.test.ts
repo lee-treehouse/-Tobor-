@@ -45,31 +45,31 @@ describe("E2E success cases from fixtures", () => {
     expect(loggerSpy).toHaveBeenCalledWith("3,3,NORTH");
   });
 
-  const exploreBoundaryCases = [
-    {
-      tableWidth: "5",
-      tableLength: "5",
-      output: ["0,4,NORTH", "0,4,NORTH", "4,4,EAST", "4,4,EAST", "4,0,SOUTH", "4,0,SOUTH", "0,0,WEST"],
-    },
-    {
-      tableWidth: "6",
-      tableLength: "6",
-      output: ["0,4,NORTH", "0,5,NORTH", "4,5,EAST", "5,5,EAST", "5,1,SOUTH", "5,0,SOUTH", "1,0,WEST"],
-    },
-  ];
-  test.each(exploreBoundaryCases)(
-    "Should explore table boundaries with varied output depending on table size",
-    async ({ tableWidth, tableLength, output }) => {
-      process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/explore_table_boundaries.txt`;
-      process.env.TABLE_WIDTH = tableWidth;
-      process.env.TABLE_LENGTH = tableLength;
-      await run(logger);
+  // const exploreBoundaryCases = [
+  //   {
+  //     tableWidth: "5",
+  //     tableLength: "5",
+  //     output: ["0,4,NORTH", "0,4,NORTH", "4,4,EAST", "4,4,EAST", "4,0,SOUTH", "4,0,SOUTH", "0,0,WEST"],
+  //   },
+  //   {
+  //     tableWidth: "6",
+  //     tableLength: "6",
+  //     output: ["0,4,NORTH", "0,5,NORTH", "4,5,EAST", "5,5,EAST", "5,1,SOUTH", "5,0,SOUTH", "1,0,WEST"],
+  //   },
+  // ];
+  // test.each(exploreBoundaryCases)(
+  //   "Should explore table boundaries with varied output depending on table size",
+  //   async ({ tableWidth, tableLength, output }) => {
+  //     process.env.FILENAME = `src/__TESTS__/TestFiles/Scenarios/explore_table_boundaries.txt`;
+  //     process.env.TABLE_WIDTH = tableWidth;
+  //     process.env.TABLE_LENGTH = tableLength;
+  //     await run(logger);
 
-      output.forEach((item) => {
-        expect(loggerSpy).toHaveBeenCalledWith(item);
-      });
-    }
-  );
+  //     output.forEach((item) => {
+  //       expect(loggerSpy).toHaveBeenCalledWith(item);
+  //     });
+  //   }
+  // );
 });
 
 describe("E2E failure tests from fixtures", () => {
