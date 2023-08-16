@@ -23,11 +23,21 @@ const COMPLEX_OBSTACLE_COORDINATES = [
 /*
 Visualising complex obstacle coordinates
 
+start and destination
+
 [ ] [ ] [X] [ ] [X] [ ]
 [s] [ ] [X] [ ] [X] [ ]
 [ ] [ ] [X] [X] [X] [d]
 [ ] [ ] [ ] [X] [ ] [ ]
 [ ] [ ] [ ] [ ] [ ] [ ]
+
+path
+
+[ ] [ ] [X] [ ] [X] [ ]
+[1] [ ] [X] [ ] [X] [ ]
+[2] [ ] [X] [X] [X] [11]
+[3] [ ] [ ] [X] [9] [10]
+[4] [5] [6] [7] [8] [ ]
 
 [0,4] [1,4] [2,4] [3,4] [4,4] [5,4]
 [0,3] [1,3] [2,3] [3,3] [4,3] [5,3]
