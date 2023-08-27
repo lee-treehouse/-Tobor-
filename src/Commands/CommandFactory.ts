@@ -11,6 +11,7 @@ import { ExitCommand } from "./Exit";
 import { CommandParserError } from "./CommandParserError";
 import { IWantToGoToThereCommand } from "./IWantToGoToThere";
 import { Coordinates } from "../Common/Coordinates";
+import { PrintCommand } from "./Print";
 
 export const getCommand = (
   input: CommandInput,
@@ -30,6 +31,8 @@ export const getCommand = (
       return new PlaceCommand(args);
     case ReportCommand.command:
       return new ReportCommand(args);
+    case PrintCommand.command:
+      return new PrintCommand(args, maxCoordinates, obstacleCoordinates);
     case DirectionChange.LEFT:
     case DirectionChange.RIGHT:
       return new ChangeDirectionCommand(args, command);

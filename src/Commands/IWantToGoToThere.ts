@@ -6,6 +6,7 @@ import {
   parseCoordinates,
 } from "../Common/Coordinates";
 import { Position } from "../Common/Position";
+import { visualiseTable } from "../Common/Visualiser";
 import { COULD_NOT_PARSE_IWANTTOGOTOTHERE_ARGUMENTS_EXPECTED_2 } from "../ErrorMessages/Parsing";
 import { Command } from "./Command";
 import { CommandParserError } from "./CommandParserError";
@@ -37,6 +38,10 @@ export class IWantToGoToThereCommand implements Command {
       return "PATH NOT FOUND";
     }
 
+    const pathCoords = path.map((coord) => ({ x: coord[0], y: coord[1] }));
+
+    const pathVisualised = visualiseTable(this.maxCoordinates, this.obstacleCoordinates, pathCoords);
+
     const commandsToAchieveResult: string[] = [
       `PLACE ${currentPosition.coordinates.x},${currentPosition.coordinates.y},${currentPosition.directionFacing}`,
     ];
@@ -55,7 +60,17 @@ export class IWantToGoToThereCommand implements Command {
       directionFacing = newDirection;
     }
 
-    return `${path.join("\n")}\n${commandsToAchieveResult.join("\n")}`;
+    let result = "";
+    result += `${path.join("\n")}\n`;
+
+    const showPath = false;
+    if (showPath) {
+      result += `${pathVisualised}\n`;
+    }
+
+    result += `${commandsToAchieveResult.join("\n")}`;
+
+    return result;
   }
 
   private coordinateArraysAreEqual = (array1: number[], array2: number[]) =>

@@ -21,4 +21,8 @@ export class Table {
   getObstaclesCoordinates = (): Coordinates[] => {
     return this.config.obstaclesCoordinates;
   };
+
+  visualiseTable = (): string => {
+    return "";
+  };
 }
